@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-</head>
-<body>
+{% extends "posts/base.html" %}
+
+{% block content %}
     <h1>Página inicial do Blog</h1>
-    
+
     {% for post in posts %}
         <a href="{% url "posts:post_detail" post.id %}">
             <h2>{{ post.title }}</h2>
         </a>
     {% endfor %}
-</body>
-</html>
+{% endblock content %}
