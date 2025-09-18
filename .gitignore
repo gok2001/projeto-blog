@@ -1,0 +1,44 @@
+# Arquivos de sistema
+*.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Virtualenv
+venv/
+ENV/
+env/
+.venv/
+
+# Arquivos de log
+*.log
+
+# Arquivos do banco local (SQLite)
+db.sqlite3
+
+# Configurações do Django
+*.pot
+*.pyc
+local_settings.py
+media/
+
+# Arquivos estáticos compilados
+staticfiles/
+static/
+
+# Cache do Django
+*.mo
+*.pot
+*.pyc
+
+# VSCode / PyCharm / outros editores
+.vscode/
+.idea/
+
+# Arquivos do sistema operacional
+.DS_Store
