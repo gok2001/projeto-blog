@@ -9,9 +9,9 @@
     <h1>Página inicial do Blog</h1>
     
     {% for post in posts %}
-        <h2>{{ post.title }}</h2>
-        <p>{{ post.content }}</p>
-        <small>{{ post.date }}</small>
+        <a href="{% url "posts:post_detail" post.id %}">
+            <h2>{{ post.title }}</h2>
+        </a>
     {% endfor %}
 </body>
 </html>
