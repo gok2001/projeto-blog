@@ -1,7 +1,7 @@
 {% extends "posts/base.html" %}
 
 {% block content %}
-    <form action="{% url "posts:post_create" %}" method="POST" enctype="multipart/form-data">
+    <form action="{% url "posts:create" %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <h1>Criar um post</h1>

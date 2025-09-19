@@ -1,54 +1,24 @@
-from django.shortcuts import render, redirect
-from django.urls import reverse
-from django.views import View
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, DetailView, ListView
 
 from .forms import PostForm
 from .models import Post
 
 
-class Index(View):
-    post_class = Post
+class Index(ListView):
+    model = Post
     template_name = 'posts/post_list.html'
+    context_object_name = 'posts'
+    ordering = ['-date']
 
-    def get(self, request):
-        posts = self.post_class.objects.all()
 
-        return render(request, self.template_name, {'posts': posts})
-    
-
-class PostDetail(View):
-    post_class = Post
+class PostDetail(DetailView):
+    model = Post
     template_name = 'posts/post_detail.html'
 
-    def get(self, request, post_id):
-        post = self.post_class.objects.get(pk=post_id)
 
-        return render(request, self.template_name, {'post': post})
-    
-
-class PostCreate(View):
-    post_class = Post
+class PostCreate(CreateView):
+    model = Post
+    form_class = PostForm
     template_name = 'posts/post_create.html'
-
-    def get(self, request):
-        form = PostForm()
-
-        context = {
-            'form': form,
-        }
-        
-        return render(request, self.template_name, context)
-    
-    def post(self, request):
-        form = PostForm(request.POST)
-
-        context = {
-            'form': form,
-    
-        }
-
-        if form.is_valid():
-            form.save()
-            return redirect('posts:index')
-        
-        return render(request, self.template_name, context)
+    success_url = reverse_lazy('posts:index')
