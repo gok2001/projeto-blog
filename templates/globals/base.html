@@ -6,6 +6,15 @@
     <title>{{ site.title }}Blog do Gui</title>
 </head>
 <body>
+    {% if user.is_authenticated %}
+        <form action="{% url "users:logout" %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">Logout</button>
+        </form>
+    {% else %}
+        <a href="{% url "users:login" %}">Login</a>
+        <a href="{% url "users:register" %}">Registrar</a>
+    {% endif %}
     {% block content %}{% endblock content %}
 </body>
 </html>
