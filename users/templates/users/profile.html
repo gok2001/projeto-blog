@@ -6,4 +6,5 @@
     <p>Conta criada em: {{ user.date_joined|date:'d/m/y H:i' }}</p>
 
     <a href="{% url "posts:index" %}">Voltar ao blog</a>
+    <a href="{% url "users:edit_profile" %}">Editar Perfil</a>
 {% endblock content %}

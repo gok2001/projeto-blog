@@ -1,0 +1,10 @@
+{% extends "globals/base.html" %}
+
+{% block content %}
+    <form action="{% url "users:edit_profile" %}" method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}        
+        <button type="submit">Editar</button>
+    </form>
+{% endblock content %}
