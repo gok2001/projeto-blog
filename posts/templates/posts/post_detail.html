@@ -4,4 +4,16 @@
     <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</p>
     <small>{{ post.date }}</small>
+    
+    <h2>Comments</h2>
+
+    <div>
+        {% if comments %}
+            {% for comment in comments %}
+                <p>{{ comment.author.user }}: {{ comment.text }}</p>
+            {% endfor %}
+        {% else %}
+            <p>Sem comentários ainda.</p>
+        {% endif %}
+    </div>
 {% endblock content %}
