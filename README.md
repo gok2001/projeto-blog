@@ -13,10 +13,10 @@ Um projeto pessoal criado para aprendizado com Django, onde somente o admin pode
 * Passos básicos:
     * Clonar repositório
     * Criar ambiente virtual
-    * Instalar dependências (pip install -r requirements.txt)
-    * Rodar migrations (python manage.py migrate)
-    * Criar superuser (python manage.py createsuperuser)
-    * Subir servidor (python manage.py runserver)
+    * Instalar dependências (```pip install -r requirements.txt```)
+    * Rodar migrations (```python manage.py migrate```)
+    * Criar superuser (```python manage.py createsuperuser```)
+    * Subir servidor (```python manage.py runserver```)
 
 ## Funcionalidades implementadas até agora
 
