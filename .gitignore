@@ -29,7 +29,6 @@ media/
 
 # Arquivos estáticos compilados
 staticfiles/
-static/
 
 # Cache do Django
 *.mo

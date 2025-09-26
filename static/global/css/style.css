@@ -1,0 +1,109 @@
+/* ===============================
+   CORES PRINCIPAIS
+   =============================== */
+
+/* Cor 1: #F2F3F7 (fundo)
+   Cor 2: #4F60A2 (links/destaques)
+   Cor 3: #0C194D (elementos secundários) */
+
+/* ===============================
+   RESET E CONFIGURAÇÕES BASE
+   =============================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #333;
+    background-color: #F2F3F7;
+}
+
+a {
+    color: #4F60A2;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+
+/* ===============================
+   NAVBAR
+   =============================== */
+nav {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    justify-content: space-between;
+    position: relative;
+}
+
+.home-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.nav-right {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+/* ===============================
+   IMAGENS
+   =============================== */
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* ===============================
+   BOTÕES (exemplo básico)
+   =============================== */
+.btn {
+    padding: 0.5rem 1rem;
+    background-color: #4F60A2;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #0C194D;
+}
+
+/* ===============================
+   MEDIA QUERIES (RESPONSIVIDADE)
+   =============================== */
+@media (max-width: 1024px) {
+    /* ajustes para tablet */
+
+}
+
+@media (max-width: 768px) {
+    /* ajustes para celular */
+    nav {
+        justify-content: space-between;
+    }
+
+    .home-link {
+        position: static;
+        transform: none;
+    }
+
+    .nav-right {
+        margin-left: 0;
+    }
+}
