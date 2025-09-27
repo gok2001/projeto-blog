@@ -210,6 +210,14 @@ h2 {
         padding: 0.45rem 0.85rem;
         font-size: 0.95rem;
     }
+
+    .post-content {
+        max-width: 600px;
+    }
+
+    h2 {
+        margin-left: 100px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -245,5 +253,13 @@ h2 {
 
     .post-card p {
         color: #666;
+    }
+
+    .post-content {
+        max-width: 400px;
+    }
+
+    h2 {
+        margin-left: 30px;
     }
 }
