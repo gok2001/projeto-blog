@@ -21,6 +21,7 @@ body {
     line-height: 1.5;
     color: #333;
     background-color: #F2F3F7;
+    padding-top: 60px;
 }
 
 a {
@@ -41,12 +42,17 @@ h1, h2, h3, h4, h5, h6 {
    NAVBAR
    =============================== */
 nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
     display: flex;
     align-items: center;
     padding: 1rem;
     justify-content: space-between;
-    position: relative;
     border-bottom: 0.2rem solid rgba(0, 0, 0, 0.207);
+    background-color: #F2F3F7;
+    z-index: 1000;
 }
 
 .home-link {
@@ -142,6 +148,32 @@ h1 {
 
 .post-card .btn {
     align-self: flex-start;
+}
+
+/* ===============================
+   POST INDIVIDUAL
+   =============================== */
+.post-content {
+    max-width: 800px;
+    height: auto;
+    margin: 2rem auto;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+h2 {
+    margin-left: 300px;
+}
+
+.comment-section {
+    max-width: 500px;
+    height: auto;
+    margin: 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* ===============================

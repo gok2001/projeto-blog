@@ -2,12 +2,13 @@
 
 {% block content %}
     <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-    <small>{{ post.date }}</small>
+    <main class="post-content">
+        <p>{{ post.content }}</p>
+        <small>{{ post.author.user }} | {{ post.date }}</small>
+    </main>
     
     <h2>Comments</h2>
-
-    <div>
+    <div class="comment-section">
         {% if comments %}
             {% for comment in comments %}
                 <p>{{ comment.author }}: {{ comment.text }}</p>
