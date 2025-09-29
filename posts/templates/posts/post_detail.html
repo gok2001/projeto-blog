@@ -7,11 +7,11 @@
         <small>{{ post.author.user }} | {{ post.date }}</small>
     </main>
     
-    <h2>Comments</h2>
     <div class="comment-section">
+        <h2 class="comment-title">Comments</h2>
         {% if comments %}
             {% for comment in comments %}
-                <p>{{ comment.author }}: {{ comment.text }}</p>
+                <p class="comment">{{ comment.author }}: {{ comment.text }}</p>
             {% endfor %}
         {% else %}
             <p>Sem comentários ainda.</p>
