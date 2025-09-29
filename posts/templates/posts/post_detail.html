@@ -11,7 +11,7 @@
         <h2 class="comment-title">Comments</h2>
         {% if comments %}
             {% for comment in comments %}
-                <p class="comment">{{ comment.author }}: {{ comment.text }}</p>
+                <div class="comment"><p class="comment-author">{{ comment.author }}</p> <p class="comment-text">{{ comment.text }}</p></div>
             {% endfor %}
         {% else %}
             <p>Sem comentários ainda.</p>
