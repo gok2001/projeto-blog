@@ -15,6 +15,7 @@
                     <p class="comment-author">{{ comment.author }}</p>
                     <p class="comment-text">{{ comment.text }}</p>
                     <small>{{ comment.created_at }}</small>
+                    <button type="button" class="reply-button" data-coment-id="{{ comment.id }}">Responder</button>
                 </div>
             {% endfor %}
         {% else %}

@@ -41,6 +41,17 @@ class PostDetail(DetailView):
         context['form'] = form
 
         return self.render_to_response(context)
+    
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        form.instance.post = self.post
+        parent_id = form.cleaned_data.get('parent_id')
+
+        if parent_id:
+            form.instance.parent_id = parent_id
+
+        return super().form_valid(form)
+    
 
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
