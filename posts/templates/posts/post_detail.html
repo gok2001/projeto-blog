@@ -11,10 +11,21 @@
         <h2 class="comment-title">Comments</h2>
         {% if comments %}
             {% for comment in comments %}
-                <div class="comment"><p class="comment-author">{{ comment.author }}</p> <p class="comment-text">{{ comment.text }}</p></div>
+                <div class="comment">
+                    <p class="comment-author">{{ comment.author }}</p>
+                    <p class="comment-text">{{ comment.text }}</p>
+                </div>
             {% endfor %}
         {% else %}
             <p>Sem comentários ainda.</p>
         {% endif %}
+        <div class="comment-form">
+            <h3>Adicionar comentário</h3>
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit">Comentar</button>
+            </form>
+        </div>
     </div>
 {% endblock content %}
