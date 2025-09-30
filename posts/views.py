@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DetailView, ListView
@@ -24,32 +24,34 @@ class PostDetail(DetailView):
         context['form'] = CommentForm()
 
         return context
-    
+
     def post(self, request, *args, **kwargs):
         self.object = self.get_object()
         form = CommentForm(request.POST)
-        
+
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = self.object
             comment.author = request.user
             comment.save()
-            
+
             return redirect('posts:detail', pk=self.object.pk)
-        
+
         context = self.get_context_data()
         context['form'] = form
-        
+
         return self.render_to_response(context)
 
 
-class PostCreate(CreateView, LoginRequiredMixin):
+class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
     form_class = PostForm
     template_name = 'posts/post_create.html'
     success_url = reverse_lazy('posts:index')
 
+    def test_func(self):
+        return self.request.user.is_superuser
+
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
-    
