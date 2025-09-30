@@ -4,7 +4,7 @@
     <main class="post-content">
         <h1>{{ post.title }}</h1>
         <p>{{ post.content }}</p>
-        <small>{{ post.author.user }} | {{ post.date }}</small>
+        <small>{{ post.author }} | {{ post.created_at }}</small>
     </main>
     
     <div class="comment-section">
@@ -14,6 +14,7 @@
                 <div class="comment">
                     <p class="comment-author">{{ comment.author }}</p>
                     <p class="comment-text">{{ comment.text }}</p>
+                    <small>{{ comment.created_at }}</small>
                 </div>
             {% endfor %}
         {% else %}

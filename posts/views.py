@@ -11,7 +11,7 @@ class Index(ListView):
     model = Post
     template_name = 'posts/post_list.html'
     context_object_name = 'posts'
-    ordering = ['-date']
+    ordering = ['-created_at']
 
 
 class PostDetail(DetailView):
@@ -48,3 +48,8 @@ class PostCreate(CreateView, LoginRequiredMixin):
     form_class = PostForm
     template_name = 'posts/post_create.html'
     success_url = reverse_lazy('posts:index')
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+    
