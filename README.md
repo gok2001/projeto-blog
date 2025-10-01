@@ -7,6 +7,7 @@ Um projeto pessoal criado para aprendizado com Django, onde somente o admin pode
 * Python 3.13
 * Django 5.2
 * SQLite (por enquanto, banco padrão)
+* HTML/CSS para templates
 
 ## Como rodar localmente
 
@@ -25,12 +26,18 @@ Um projeto pessoal criado para aprendizado com Django, onde somente o admin pode
 * Criação de posts (somente admin)
 * Registro de usuário
 * Comentários associados a posts
+* Respostas a comentários (replies)
+* Edição de comentários e respostas inline
+* Deleção de comentários e respostas
 
 ## O que está por vir (roadmap)
 
-* Melhorar sistema de comentários (ex:edição/remoção)
-* Autenticação com login/logout
+* Validação de comentários (tamanho, vazio)
+* Feedback visual usando Django messages
+* Ordenação e filtragem de comentários
 * Interface mais elaborada
+* Sistema de curtidas em posts e comentários
+* Autenticação com login/logout
 * Testes automatizados
 
 ## Licença
