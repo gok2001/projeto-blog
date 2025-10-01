@@ -3,7 +3,7 @@ function toggleReplyForm(commentId) {
     form.style.display = (form.style.display === 'none') ? 'block' : 'none';
 }
 
-function toggleEditForm(commentId) {
-    const form = document.getElementById(`comment-edit-form-${commentId}`);
+function toggleEditForm(objectId) {
+    const form = document.getElementById(`edit-form-${objectId}`);
     form.style.display = (form.style.display === 'none') ? 'block' : 'none';
 }

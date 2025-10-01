@@ -1,0 +1,22 @@
+{% for reply in comment.replies.all %}
+    <div class="reply" style="margin-left: 20px;">
+        <p>{{ reply.author }}</p>
+        <p>{{ reply.text }}</p>
+        <small>{{ reply.created_at }}</small>
+        {% if reply.author == request.user %}
+            <button type="button" onclick="toggleEditForm({{ reply.id }})">Editar</button>
+
+            {% include "posts/comment_edit.html" with comment=reply%}
+        {% endif %}
+    </div>
+{% endfor %}
+
+<div class="reply-form" id="reply-form-{{ comment.id }}" style="display: none;">
+    <form action="{% url "posts:comment_create" post.id %}" method="POST">
+        {% csrf_token %}
+
+        {{ reply_form.as_p }}
+        <input type="hidden" name="parent_id" value="{{ comment.id }}">
+        <button type="submit">Responder</button>
+    </form>
+</div>
