@@ -15,7 +15,24 @@
                     <p class="comment-author">{{ comment.author }}</p>
                     <p class="comment-text">{{ comment.text }}</p>
                     <small>{{ comment.created_at }}</small>
-                    <button type="button" class="reply-button" data-coment-id="{{ comment.id }}">Responder</button>
+                    <button type="button" onclick="toggleReplyForm({{ comment.id }})">Responder</button>
+                    
+                    {% for reply in comment.replies.all %}
+                        <div class="reply" style="margin-left: 20px;">
+                            <p>{{ reply.author }}</p>
+                            <p>{{ reply.text }}</p>
+                            <small>{{ reply.created_at }}</small>
+                        </div>
+                    {% endfor %}
+
+                    <div class="reply-form" id="reply-form-{{ comment.id }}" style="display: none;">
+                        <form method="POST">
+                            {% csrf_token %}
+                            {{ reply_form.as_p }}
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                            <button type="submit">Responder</button>
+                        </form>
+                    </div>
                 </div>
             {% endfor %}
         {% else %}
@@ -23,7 +40,7 @@
         {% endif %}
         <div class="comment-form">
             <h3>Adicionar comentário</h3>
-            <form action="" method="POST">
+            <form method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Comentar</button>
