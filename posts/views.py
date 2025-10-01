@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.shortcuts import redirect
+from django.shortcuts import redirect, get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic import CreateView, DetailView, ListView, UpdateView
 
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
@@ -26,31 +26,6 @@ class PostDetail(DetailView):
 
         return context
 
-    def post(self, request, *args, **kwargs):
-        self.object = self.get_object()
-        form = CommentForm(request.POST)
-
-        if form.is_valid():
-            comment = form.save(commit=False)
-            comment.post = self.object
-            comment.author = request.user
-            parent_id = form.cleaned_data.get('parent_id')
-
-            if parent_id:
-                try:
-                    parent_comment = Comment.objects.get(id=parent_id)
-                    comment.parent = parent_comment
-                except Comment.DoesNotExist:
-                    comment.parent = None
-
-            comment.save()
-            return redirect('posts:detail', pk=self.object.pk)
-
-        context = self.get_context_data()
-        context['form'] = form
-
-        return self.render_to_response(context)
-
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Post
@@ -64,3 +39,26 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+
+class CommentCreate(LoginRequiredMixin, CreateView):
+    model = Comment
+    form_class = CommentForm
+
+    def form_valid(self, form):
+        post_id = self.kwargs.get('post_id')
+        form.instance.post = get_object_or_404(Post, id=post_id)
+        form.instance.author = self.request.user
+
+        parent_id = form.cleaned_data.get('parent_id')
+        if parent_id:
+            try:
+                parent_comment = Comment.objects.get(id=parent_id)
+                form.instance.parent = parent_comment
+            except Comment.DoesNotExist:
+                form.instance.parent = None
+
+        return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})

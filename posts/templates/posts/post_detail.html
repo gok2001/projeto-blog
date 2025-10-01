@@ -26,7 +26,7 @@
                     {% endfor %}
 
                     <div class="reply-form" id="reply-form-{{ comment.id }}" style="display: none;">
-                        <form method="POST">
+                        <form action="{% url "posts:comment_create" post.id %}" method="POST">
                             {% csrf_token %}
                             {{ reply_form.as_p }}
                             <input type="hidden" name="parent_id" value="{{ comment.id }}">
@@ -40,7 +40,7 @@
         {% endif %}
         <div class="comment-form">
             <h3>Adicionar comentário</h3>
-            <form method="POST">
+            <form action="{% url "posts:comment_create" post.id %}" method="POST">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit">Comentar</button>
