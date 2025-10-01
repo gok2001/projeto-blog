@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
 
 from .forms import PostForm, CommentForm
 from .models import Post, Comment
@@ -59,10 +59,10 @@ class CommentCreate(LoginRequiredMixin, CreateView):
                 form.instance.parent = None
 
         return super().form_valid(form)
-    
+
     def get_success_url(self):
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})
-    
+
 
 class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
@@ -75,3 +75,13 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     def get_success_url(self):
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})
 
+
+class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    template_name = 'posts/comment_delete.html'
+
+    def test_func(self):
+        return self.request.user == self.get_object().author or self.request.user.is_superuser
+
+    def get_success_url(self):
+        return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})

@@ -5,8 +5,13 @@
         <small>{{ reply.created_at }}</small>
         {% if reply.author == request.user %}
             <button type="button" onclick="toggleEditForm({{ reply.id }})">Editar</button>
-
             {% include "posts/comment_edit.html" with comment=reply%}
+
+            <form action="{% url "posts:comment_delete" reply.id %}" method="POST" style="display: inline;">
+                {% csrf_token %}
+
+                <button type="submit">Deletar</button>
+            </form>
         {% endif %}
     </div>
 {% endfor %}

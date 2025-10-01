@@ -9,8 +9,12 @@
                 <button type="button" onclick="toggleReplyForm({{ comment.id }})">Responder</button>
                 {% if comment.author == request.user %}
                     <button type="button" onclick="toggleEditForm({{ comment.id }})">Editar</button>
-
                     {% include "posts/comment_edit.html" with comment=comment %}
+                    <form action="{% url "posts:comment_delete" comment.id %}" method="POST" style="display: inline;">
+                        {% csrf_token %}
+
+                        <button type="submit">Deletar</button>
+                    </form>
                 {% endif %}
                 
                 {% include "posts/replies.html" %}
