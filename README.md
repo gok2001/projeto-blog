@@ -25,6 +25,7 @@ Um projeto pessoal criado para aprendizado com Django, onde somente o admin pode
 * Detalhe de post
 * Criação de posts (somente admin)
 * Registro de usuário
+* Autenticação com login/logout
 * Comentários associados a posts
 * Respostas a comentários (replies)
 * Edição de comentários e respostas inline
@@ -37,7 +38,6 @@ Um projeto pessoal criado para aprendizado com Django, onde somente o admin pode
 * Ordenação e filtragem de comentários
 * Interface mais elaborada
 * Sistema de curtidas em posts e comentários
-* Autenticação com login/logout
 * Testes automatizados
 
 ## Licença
