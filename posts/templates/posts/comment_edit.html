@@ -1,0 +1,8 @@
+<div class="comment-edit-form"  id="comment-edit-form-{{ comment.id }}" style="display: none;">
+    <form action="{% url "posts:comment_edit" comment.id %}" method="POST">
+        {% csrf_token %}
+
+        <textarea name="text">{{ comment.text }}</textarea>
+        <button type="submit">Salvar</button>
+    </form>
+</div>

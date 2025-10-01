@@ -7,44 +7,5 @@
         <small>{{ post.author }} | {{ post.created_at }}</small>
     </main>
     
-    <div class="comment-section">
-        <h2 class="comment-title">Comments</h2>
-        {% if comments %}
-            {% for comment in comments %}
-                <div class="comment">
-                    <p class="comment-author">{{ comment.author }}</p>
-                    <p class="comment-text">{{ comment.text }}</p>
-                    <small>{{ comment.created_at }}</small>
-                    <button type="button" onclick="toggleReplyForm({{ comment.id }})">Responder</button>
-                    
-                    {% for reply in comment.replies.all %}
-                        <div class="reply" style="margin-left: 20px;">
-                            <p>{{ reply.author }}</p>
-                            <p>{{ reply.text }}</p>
-                            <small>{{ reply.created_at }}</small>
-                        </div>
-                    {% endfor %}
-
-                    <div class="reply-form" id="reply-form-{{ comment.id }}" style="display: none;">
-                        <form action="{% url "posts:comment_create" post.id %}" method="POST">
-                            {% csrf_token %}
-                            {{ reply_form.as_p }}
-                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                            <button type="submit">Responder</button>
-                        </form>
-                    </div>
-                </div>
-            {% endfor %}
-        {% else %}
-            <p>Sem comentários ainda.</p>
-        {% endif %}
-        <div class="comment-form">
-            <h3>Adicionar comentário</h3>
-            <form action="{% url "posts:comment_create" post.id %}" method="POST">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">Comentar</button>
-            </form>
-        </div>
-    </div>
+    {% include "posts/comment_section.html" %}
 {% endblock content %}
