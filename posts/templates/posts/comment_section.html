@@ -1,12 +1,23 @@
 <div class="comment-section">
     <h2 class="comment-title">Comments</h2>
+
+    {% if form.non_field_errors %}
+        <ul class="errorlist">
+            {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
     {% if comments %}
         {% for comment in comments %}
             <div class="comment">
                 <p class="comment-author">{{ comment.author }}</p>
                 <p class="comment-text">{{ comment.text }}</p>
                 <small>{{ comment.created_at }}</small>
+
                 <button type="button" onclick="toggleReplyForm({{ comment.id }})">Responder</button>
+
                 {% if comment.author == request.user %}
                     <button type="button" onclick="toggleEditForm({{ comment.id }})">Editar</button>
                     {% include "posts/comment_edit.html" with comment=comment %}
@@ -26,10 +37,24 @@
 
     <div class="comment-form">
         <h3>Adicionar comentário</h3>
+
         <form action="{% url "posts:comment_create" post.id %}" method="POST">
             {% csrf_token %}
+            
+            <div class="form-group">
+                {{ form.text.label_tag }}
+                {{ form.text }}
+                {% if form.text.errors %}
+                    <ul class="errorlist">
+                        {% for error in form.text.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </div>
 
-            {{ form.as_p }}
+            {{ form.parent_id }}
+
             <button type="submit">Comentar</button>
         </form>
     </div>

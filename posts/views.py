@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import ValidationError
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -44,13 +45,14 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 class CommentCreate(LoginRequiredMixin, CreateView):
     model = Comment
     form_class = CommentForm
+    template_name = 'posts/post_detail.html'
 
     def form_valid(self, form):
         post_id = self.kwargs.get('post_id')
         form.instance.post = get_object_or_404(Post, id=post_id)
         form.instance.author = self.request.user
-
         parent_id = form.cleaned_data.get('parent_id')
+
         if parent_id:
             try:
                 parent_comment = Comment.objects.get(id=parent_id)
@@ -58,7 +60,28 @@ class CommentCreate(LoginRequiredMixin, CreateView):
             except Comment.DoesNotExist:
                 form.instance.parent = None
 
+        try:
+            form.instance.full_clean()
+        except ValidationError as error:
+            if hasattr(error, 'message_dict'):
+                for field, messages in error.message_dict.items():
+                    for message in messages:
+                        form.add_error(field, message)
+            else:
+                form.add_error(None, error.messages)
+
+            return self.form_invalid(form)
+
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        post_id = self.kwargs.get('post_id')
+        post = get_object_or_404(Post, id=post_id)
+        comments =  post.comments.filter(parent__isnull=True)
+        context = self.get_context_data(form=form, post=post, comments=comments)
+
+        return self.render_to_response(context)
+    
 
     def get_success_url(self):
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})
@@ -68,6 +91,29 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = 'posts/comment_edit.html'
+
+    def form_valid(self, form):
+        try:
+            form.instance.full_clean()
+        except ValidationError as error:
+            if hasattr(error, 'message_dict'):
+                for field, messages in error.message_dict.items():
+                    for message in messages:
+                        form.add_error(field, message)
+            else:
+                form.add_error(None, error.messages)
+
+            return self.form_invalid(form)
+
+        return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        post_id = self.kwargs.get('post_id')
+        post = get_object_or_404(Post, id=post_id)
+        comments =  post.comments.filter(parent__isnull=True)
+        context = self.get_context_data(form=form, post=post, comments=comments)
+
+        return self.render_to_response(context)
 
     def test_func(self):
         return self.request.user == self.get_object().author
