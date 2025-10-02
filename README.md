@@ -46,10 +46,8 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 
 2. Crie e ative um ambiente virtual:
 ```python -m venv venv```
-# Windows
-```venv/Scripts/activate```
-# macOS/Linux
-```source venv/bin/activate```
+* Windows: ```venv/Scripts/activate```
+* macOS/Linux: ```source venv/bin/activate```
 
 3. Instale as dependências:
 ```pip install -r requirements.txt```
@@ -63,7 +61,7 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 6. Inicie o servidor:
 ```python manage.py runserver```
 
-O projeto estará disponível em http://127.0.0.1:8000
+O projeto estará disponível em ```http://127.0.0.1:8000```
 
 ---
 
