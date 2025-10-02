@@ -1,5 +1,8 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
+from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
@@ -42,10 +45,11 @@ class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
         return super().form_valid(form)
 
 
-class CommentCreate(LoginRequiredMixin, CreateView):
+class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Comment
     form_class = CommentForm
     template_name = 'posts/post_detail.html'
+    success_message = 'Comentário criado com sucesso'
 
     def form_valid(self, form):
         post_id = self.kwargs.get('post_id')
@@ -80,6 +84,14 @@ class CommentCreate(LoginRequiredMixin, CreateView):
         comments =  post.comments.filter(parent__isnull=True)
         context = self.get_context_data(form=form, post=post, comments=comments)
 
+        if 'reply_form' not in context:
+            context['reply_form'] = CommentForm()
+
+        messages.error(
+            self.request, 
+            'Não foi possível salvar o comentário. Corrija os erros abaixo.'
+        )
+
         return self.render_to_response(context)
     
 
@@ -87,10 +99,11 @@ class CommentCreate(LoginRequiredMixin, CreateView):
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})
 
 
-class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Comment
     form_class = CommentForm
     template_name = 'posts/comment_edit.html'
+    success_message = 'Comentário atualizado com sucesso'
 
     def form_valid(self, form):
         try:
@@ -128,6 +141,7 @@ class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user == self.get_object().author or self.request.user.is_superuser
-
+    
     def get_success_url(self):
+        messages.success(self.request, 'Comentário deletado com sucesso')
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})
