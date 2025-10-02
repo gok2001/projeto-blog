@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class Post(models.Model):
@@ -32,3 +34,25 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:20]
+    
+    def clean(self):
+        errors = {}
+        field_text = (self.text or '').strip()
+
+        if len(field_text) > 500:
+            errors['text'] = _(
+                'Texto atingiu o limite de caracteres (%(max_length)d).'
+            ) % {'max_length': 500}
+            
+        if self.parent and self.parent.pk == self.pk:
+            errors['parent'] = _(
+                'Um comentário não pode ser pai de si mesmo.'
+            )
+
+        if self.parent and self.parent.post_id != self.post_id:
+            errors['parent'] = _(
+                'O comentário pai deve pertencer ao mesmo post.'
+            )
+            
+        if errors:
+            raise ValidationError(errors)
