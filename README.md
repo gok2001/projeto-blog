@@ -46,9 +46,9 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 
 2. Crie e ative um ambiente virtual:
 ```python -m venv venv```
-# Windows
+* Windows
 ```venv/Scripts/activate```
-# macOS/Linux
+* macOS/Linux
 ```source venv/bin/activate```
 
 3. Instale as dependências:
