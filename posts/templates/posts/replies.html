@@ -1,16 +1,16 @@
 {% for reply in comment.replies.all %}
-    <div class="reply" style="margin-left: 20px;">
-        <p>{{ reply.author }}</p>
-        <p>{{ reply.text }}</p>
-        <small>{{ reply.created_at }}</small>
+    <div class="reply">
+        <p class="comment-author">{{ reply.author }}</p>
+        <p class="comment-text">{{ reply.text }}</p>
+        <small class="comment-date">{{ reply.created_at }}</small>
         {% if reply.author == request.user %}
-            <button type="button" onclick="toggleEditForm({{ reply.id }})">Editar</button>
+            <button type="button" onclick="toggleEditForm({{ reply.id }})" class="btn btn-secondary">Editar</button>
             {% include "posts/comment_edit.html" with comment=reply%}
 
             <form action="{% url "posts:comment_delete" reply.id %}" method="POST" style="display: inline;">
                 {% csrf_token %}
 
-                <button type="submit">Deletar</button>
+                <button type="submit" class="btn btn-danger">Deletar</button>
             </form>
         {% endif %}
     </div>
@@ -22,6 +22,6 @@
 
         {{ reply_form.as_p }}
         <input type="hidden" name="parent_id" value="{{ comment.id }}">
-        <button type="submit">Responder</button>
+        <button type="submit" class="btn">Responder</button>
     </form>
 </div>
