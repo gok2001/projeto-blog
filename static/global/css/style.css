@@ -13,12 +13,14 @@
   --color-primary: #4f46e5;   /* azul violeta (links, botões) */
   --color-primary-hover: #6366f1;
   --color-secondary: #ec4899; /* rosa de destaque */
+  --color-secondary-hover: #db2777; 
   --color-accent: #22c55e;    /* verde para sucesso */
 
   /* ⚠️ Cores de status */
   --color-success: #22c55e;
   --color-warning: #facc15;
   --color-danger: #ef4444;
+  --color-danger-hover: #b91c1c;
 
   /* 🔠 Tipografia */
   --font-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -130,6 +132,35 @@ img {
     background-color: var(--color-primary-hover);
 }
 
+.btn-secondary {
+    background-color: var(--color-secondary);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-secondary-hover);
+}
+
+.btn-danger {
+    background-color: var(--color-danger);
+}
+
+.btn-danger:hover {
+    background-color: var(--color-danger-hover);
+}
+
+/* ===============================
+   MENSAGENS
+   =============================== */
+.errorlist {
+    color: var(--color-danger);
+    margin: var(--spacing-sm);
+    list-style: none;
+}
+
+.errorlist li {
+    margin-left: var(--spacing-md);
+}
+
 /* ===============================
    PÁGINA INICIAL
    =============================== */
@@ -217,6 +248,12 @@ h1 {
     align-items: stretch;
 }
 
+.comment-section .btn {
+    font-size: 0.8rem;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    margin: 0 2px;
+}
+
 .comment {
     background-color: var(--color-bg-alt);
     margin-bottom: var(--spacing-md);
@@ -229,10 +266,25 @@ h1 {
 .comment-author {
     font-weight: bold;
     color: var(--color-primary);
+    margin-bottom: var(--spacing-xs);
 }
 
 .comment-text {
+    margin: var(--spacing-sm);
+}
+
+.comment-date {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    display: block;
     margin-top: var(--spacing-xs);
+}
+
+.comment-form textarea {
+    width: 100%;
+    max-width: 600px;
+    height: 120px;
+    resize: none;
 }
 
 /* ===============================

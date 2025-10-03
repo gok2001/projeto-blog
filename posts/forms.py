@@ -16,6 +16,13 @@ class CommentForm(forms.ModelForm):
     class Meta:
         model = models.Comment
         fields = ('text',)
+        widgets = {
+            'text': forms.Textarea(attrs={
+                'maxlength': 500,
+                'rows': 5,
+                'placeholder': 'Escreva seu comentário aqui...',
+            }),
+        }
 
     def clean_text(self):
         text = self.cleaned_data.get('text', '') or ''

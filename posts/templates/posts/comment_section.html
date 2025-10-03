@@ -14,17 +14,17 @@
             <div class="comment">
                 <p class="comment-author">{{ comment.author }}</p>
                 <p class="comment-text">{{ comment.text }}</p>
-                <small>{{ comment.created_at }}</small>
+                <small class="comment-date">{{ comment.created_at }}</small>
 
-                <button type="button" onclick="toggleReplyForm({{ comment.id }})">Responder</button>
+                <button type="button" onclick="toggleReplyForm({{ comment.id }})" class="btn">Responder</button>
 
                 {% if comment.author == request.user %}
-                    <button type="button" onclick="toggleEditForm({{ comment.id }})">Editar</button>
+                    <button type="button" onclick="toggleEditForm({{ comment.id }})" class="btn btn-secondary">Editar</button>
                     {% include "posts/comment_edit.html" with comment=comment %}
                     <form action="{% url "posts:comment_delete" comment.id %}" method="POST" style="display: inline;">
                         {% csrf_token %}
 
-                        <button type="submit">Deletar</button>
+                        <button type="submit" class="btn btn-danger">Deletar</button>
                     </form>
                 {% endif %}
                 
@@ -42,7 +42,6 @@
             {% csrf_token %}
             
             <div class="form-group">
-                {{ form.text.label_tag }}
                 {{ form.text }}
                 {% if form.text.errors %}
                     <ul class="errorlist">
@@ -55,7 +54,7 @@
 
             {{ form.parent_id }}
 
-            <button type="submit">Comentar</button>
+            <button type="submit" class="btn">Comentar</button>
         </form>
     </div>
 </div>
