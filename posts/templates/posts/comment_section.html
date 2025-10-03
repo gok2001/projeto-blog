@@ -11,25 +11,28 @@
 
     {% if comments %}
         {% for comment in comments %}
-            <div class="comment">
+
+            <div class="comment" id="comment-{{ comment.id }}">
+
                 <p class="comment-author">{{ comment.author }}</p>
                 <p class="comment-text">{{ comment.text }}</p>
                 <small class="comment-date">{{ comment.created_at }}</small>
 
-                <button type="button" onclick="toggleReplyForm({{ comment.id }})" class="btn">Responder</button>
+                <button type="button" onclick="toggleReplyForm({{ comment.id }})" class="reply-btn btn">Responder</button>
 
                 {% if comment.author == request.user %}
-                    <button type="button" onclick="toggleEditForm({{ comment.id }})" class="btn btn-secondary">Editar</button>
+                    <button type="button" onclick="toggleEditForm({{ comment.id }})" class="edit-btn btn btn-secondary">Editar</button>
                     {% include "posts/comment_edit.html" with comment=comment edit_form=form edit_comment_id=edit_comment_id %}
                     <form action="{% url "posts:comment_delete" comment.id %}" method="POST" style="display: inline;">
                         {% csrf_token %}
 
-                        <button type="submit" class="btn btn-danger">Deletar</button>
+                        <button type="submit" class="delete-btn btn btn-danger">Deletar</button>
                     </form>
                 {% endif %}
                 
                 {% include "posts/replies.html" %}
             </div>
+
         {% endfor %}
     {% else %}
         <p>Sem comentários ainda.</p>

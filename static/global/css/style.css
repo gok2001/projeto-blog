@@ -318,16 +318,18 @@ h1 {
     border-radius: 8px;
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-md);
     margin-bottom: var(--spacing-md);
 }
 
 .reply-form {
+    margin-left: 20px;
     background-color: var(--color-bg-alt);
     padding: var(--spacing-md);
     border-radius: 8px;
     border: 1px solid var(--color-border);
     box-shadow: var(--shadow-md);
-    margin-top: var(--spacing-sm);
+    margin-top: var(--spacing-md);
 }
 
 .reply-form textarea {

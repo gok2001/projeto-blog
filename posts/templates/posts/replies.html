@@ -20,7 +20,7 @@
     <form action="{% url "posts:comment_create" post.id %}" method="POST">
         {% csrf_token %}
 
-        {{ reply_form.as_p }}
+        {{ reply_form.text }}
         <input type="hidden" name="parent_id" value="{{ comment.id }}">
         <button type="submit" class="btn">Responder</button>
     </form>
