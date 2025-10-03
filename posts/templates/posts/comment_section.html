@@ -20,7 +20,7 @@
 
                 {% if comment.author == request.user %}
                     <button type="button" onclick="toggleEditForm({{ comment.id }})" class="btn btn-secondary">Editar</button>
-                    {% include "posts/comment_edit.html" with comment=comment %}
+                    {% include "posts/comment_edit.html" with comment=comment edit_form=form edit_comment_id=edit_comment_id %}
                     <form action="{% url "posts:comment_delete" comment.id %}" method="POST" style="display: inline;">
                         {% csrf_token %}
 

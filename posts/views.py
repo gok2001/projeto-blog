@@ -102,7 +102,7 @@ class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     model = Comment
     form_class = CommentForm
-    template_name = 'posts/comment_edit.html'
+    template_name = 'posts/post_detail.html'
     success_message = 'Comentário atualizado com sucesso'
 
     def form_valid(self, form):
@@ -121,10 +121,23 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, 
         return super().form_valid(form)
     
     def form_invalid(self, form):
-        post_id = self.kwargs.get('post_id')
-        post = get_object_or_404(Post, id=post_id)
+        comment = self.get_object()
+        post = comment.post
         comments =  post.comments.filter(parent__isnull=True)
-        context = self.get_context_data(form=form, post=post, comments=comments)
+        context = {
+            'object': post,
+            'post': post,
+            'comments': comments,
+            'form': CommentForm(),
+            'reply_form': CommentForm(),
+            'edit_form': form,
+            'edit_comment_id': comment.id
+        }
+
+        messages.error(
+            self.request, 
+            'Não foi possível atualizar o comentário. Corrija os erros abaixo.'
+        )
 
         return self.render_to_response(context)
 

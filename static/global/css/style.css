@@ -234,6 +234,9 @@ h1 {
     justify-content: space-evenly;
 }
 
+/* ===============================
+   COMENTÁRIOS
+   =============================== */
 .post-content p {
     margin-bottom: var(--spacing-md);
 }
@@ -283,8 +286,29 @@ h1 {
 .comment-form textarea {
     width: 100%;
     max-width: 600px;
-    height: 120px;
     resize: none;
+}
+
+.comment-text {
+    margin-top: var(--spacing-xs);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+}
+
+.edit-form {
+    background-color: var(--color-bg-alt);
+    padding: var(--spacing-md);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-md);
+    margin-top: var(--spacing-sm);
+}
+
+.edit-form textarea {
+    width: 100%;
+    resize: none;
+    margin-bottom: var(--spacing-sm);
 }
 
 /* ===============================
