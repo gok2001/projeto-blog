@@ -13,4 +13,8 @@ urlpatterns = [
     path('post/<int:post_id>/comment/', views.CommentCreate.as_view(), name='comment_create'),
     path('post/<int:pk>/edit/', views.CommentEdit.as_view(), name='comment_edit'),
     path('post/<int:pk>/delete/', views.CommentDelete.as_view(), name='comment_delete'),
+
+    # Tags e Categorias
+    path('categoria/<slug:slug>/', views.PostsByCategoryView.as_view(), name='posts_by_category'),
+    path('tag/<slug:slug>/', views.PostsByTagView.as_view(), name='posts_by_tag')
 ]

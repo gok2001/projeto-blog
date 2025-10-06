@@ -2,47 +2,12 @@ from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DeleteView, DetailView, ListView, UpdateView
+from django.views.generic import CreateView, DeleteView, UpdateView
 
-from .forms import PostForm, CommentForm
-from .models import Post, Comment
-
-
-class Index(ListView):
-    model = Post
-    template_name = 'posts/post_list.html'
-    context_object_name = 'posts'
-    ordering = ['-created_at']
-
-
-class PostDetail(DetailView):
-    model = Post
-    template_name = 'posts/post_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['comments'] = self.object.comments.filter(parent__isnull=True)
-        context['reply_form'] = CommentForm()
-        context['form'] = CommentForm()
-
-        return context
-
-
-class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
-    model = Post
-    form_class = PostForm
-    template_name = 'posts/post_create.html'
-    success_url = reverse_lazy('posts:index')
-
-    def test_func(self):
-        return self.request.user.is_superuser
-
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
+from posts.forms import CommentForm
+from posts.models import Post, Comment
 
 
 class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
@@ -68,8 +33,8 @@ class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             form.instance.full_clean()
         except ValidationError as error:
             if hasattr(error, 'message_dict'):
-                for field, messages in error.message_dict.items():
-                    for message in messages:
+                for field, _messages in error.message_dict.items():
+                    for message in _messages:
                         form.add_error(field, message)
             else:
                 form.add_error(None, error.messages)
@@ -110,8 +75,8 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, 
             form.instance.full_clean()
         except ValidationError as error:
             if hasattr(error, 'message_dict'):
-                for field, messages in error.message_dict.items():
-                    for message in messages:
+                for field, _messages in error.message_dict.items():
+                    for message in _messages:
                         form.add_error(field, message)
             else:
                 form.add_error(None, error.messages)
