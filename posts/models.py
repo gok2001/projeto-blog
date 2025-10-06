@@ -4,6 +4,21 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+class Category(models.Model):
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
+
+    name = models.CharField(max_length=50, unique=True)
+    slug = models.SlugField(unique=True)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30, unique=True)
+    slug = models.SlugField(unique=True)
+
+
+
 class Post(models.Model):
     title = models.CharField(max_length=50)
     author = models.ForeignKey(
@@ -11,6 +26,8 @@ class Post(models.Model):
     content = models.TextField()
     summary = models.CharField(max_length=300, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
         return self.title
