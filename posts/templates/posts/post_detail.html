@@ -17,17 +17,23 @@
         <small>{{ post.author }} | {{ post.created_at }}</small>
     </main>
 
-    {% comment %} <div>
-        <p>Categoria: <a href="{% url "posts_by_category" post.category.slug %}">{{ post.category.name }}</a></p>
+    <div>
+        <p>Categoria:
+            {% if post.category %}
+                <a href="{% url "posts:category" post.category.slug %}">{{ post.category.name }}</a>
+            {% else %}
+                Sem Categoria
+            {% endif %}
+        </p>
 
         <p>Tags:
             {% for tag in post.tags.all %}
-                <a href="{% url "posts_by_tags" tag.slug %}">#{{ tag.name }}</a>
+                <a href="{% url "posts:tag" tag.slug %}">#{{ tag.name }}</a>
             {% empty %}
                 Nenhuma tag
             {% endfor %}
         </p>
-    </div> {% endcomment %}
+    </div>
     
     {% include "posts/comment_section.html" %}
 {% endblock content %}
