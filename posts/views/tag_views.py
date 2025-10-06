@@ -5,7 +5,7 @@ from posts.models import Post, Tag
 
 class PostsByTagView(ListView):
     model = Post
-    template_name = 'posts/posts_by_tag.html'
+    template_name = 'posts/post_list.html'
     context_object_name = 'posts'
 
     def get_queryset(self):

@@ -1,7 +1,13 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <h1>Página inicial do Blog</h1>
+    {% if category %}
+        <h1>Postagens em categoria: {{ category.name }}</h1>
+    {% elif tag %}
+        <h1>Postagens com a tag: #{{ tag.name }}</h1>
+    {% else %}
+        <h1>Todas as postagens</h1>
+    {% endif %}
     <main class="posts-container">
         {% for post in posts %}
             <article class="post-card">

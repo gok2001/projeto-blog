@@ -18,15 +18,22 @@ class Tag(models.Model):
     slug = models.SlugField(unique=True)
 
 
-
 class Post(models.Model):
     title = models.CharField(max_length=50)
     author = models.ForeignKey(
-        User, on_delete=models.CASCADE, related_name='posts')
+        User,
+        on_delete=models.CASCADE,
+        related_name='posts'
+    )
     content = models.TextField()
     summary = models.CharField(max_length=300, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    category = models.ForeignKey(Category, on_delete=models.SET_NULL, null=True, blank=True)
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True
+    )
     tags = models.ManyToManyField(Tag, blank=True)
 
     def __str__(self):
@@ -51,7 +58,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return self.text[:20]
-    
+
     def clean(self):
         errors = {}
         field_text = (self.text or '').strip()
@@ -60,7 +67,7 @@ class Comment(models.Model):
             errors['text'] = _(
                 'Texto atingiu o limite de caracteres (%(max_length)d).'
             ) % {'max_length': 500}
-            
+
         if self.parent and self.parent.pk == self.pk:
             errors['parent'] = _(
                 'Um comentário não pode ser pai de si mesmo.'
@@ -70,6 +77,6 @@ class Comment(models.Model):
             errors['parent'] = _(
                 'O comentário pai deve pertencer ao mesmo post.'
             )
-            
+
         if errors:
             raise ValidationError(errors)
