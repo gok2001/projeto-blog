@@ -1,7 +1,7 @@
 # Blog Pessoal em Django
 
-Blog pessoal desenvolvido com Django para aprendizado e prática de desenvolvimento web. 
-Permite que o administrador crie posts enquanto usuários autenticados podem comentar e responder comentários. 
+Blog pessoal desenvolvido em Django como projeto de aprendizado, focado em boas práticas de desenvolvimento web.
+Permite que o administrador crie posts enquanto usuários autenticados podem comentar e responder comentários.
 O foco é aprender boas práticas de Django, gerenciamento de usuários, relacionamentos de models e manipulação de formulários.
 
 ---
@@ -28,11 +28,16 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 
 ---
 
-## Roadmap (em desenvolvimento)
+## Roadmap
+
+### Em desenvolvimento
 
 * Feedback visual usando Django messages
 * Ordenação e filtragem de comentários
 * Interface mais elaborada e responsiva
+
+### Planejado
+
 * Sistema de curtidas em posts e comentários
 * Testes automatizados
 
@@ -69,7 +74,7 @@ O projeto estará disponível em ```http://127.0.0.1:8000```
 
 * ```posts/``` - App principal com models, views, templates e forms
 * ```users``` - App com models, views, templates e forms de usuário
-* ```templates/``` - Templates HTML
+* ```templates/``` - Templates HTML globais
 * ```static/``` - CSS e arquivos estáticos
 * ```db.sqlite3``` - Banco de dados SQLite (padrão)
 
