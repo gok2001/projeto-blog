@@ -35,7 +35,7 @@ class RegisterView(CreateView):
             profile.save()
 
             return redirect(self.success_url)
-        
+
         return render(
             request,
             self.template_name,
@@ -56,9 +56,39 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
 
 class EditProfileView(LoginRequiredMixin, UpdateView):
-    form_class = RegisterUpdateForm
     template_name = 'users/edit_profile.html'
     success_url = reverse_lazy('users:profile')
 
-    def get_object(self, queryset=None):
-        return self.request.user
+    def get(self, request, *args, **kwargs):
+        user_form = RegisterForm(instance=request.user)
+        profile_form = ProfileForm(instance=request.user.profile)
+
+        return render(
+            request,
+            self.template_name,
+            {
+                'user_form': user_form,
+                'profile_form': profile_form,
+            }
+        )
+
+    def post(self, request, *args, **kwargs):
+        user_form = RegisterForm(request.POST, instance=request.user)
+        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user = user_form.save()
+            profile = profile_form.save(commit=False)
+            profile.user = user
+            profile.save()
+
+            return redirect(self.success_url)
+
+        return render(
+            request,
+            self.template_name,
+            {
+                'user_form': user_form,
+                'profile_form': profile_form,
+            }
+        )

@@ -1,10 +1,12 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <form action="{% url "users:register" %}" method="POST">
+    <form action="{% url "users:register" %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
-        {{ form.as_p }}        
+        {{ user_form.as_p }}
+        {{ profile_form.as_p }}
+
         <button type="submit">Registrar</button>
     </form>
 {% endblock content %}

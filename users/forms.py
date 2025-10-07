@@ -110,8 +110,12 @@ class RegisterUpdateForm(forms.ModelForm):
                 self.add_error('password1', ValidationError(errors))
 
         return password1
-    
+
 
 class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ('avatar', 'bio',)
+
     avatar = forms.ImageField(required=False)
     bio = forms.CharField(widget=forms.Textarea)

@@ -4,7 +4,15 @@
     <h1>Perfil de {{ user.username }}</h1>
     <p>Email: {{ user.email }}</p>
     <p>Conta criada em: {{ user.date_joined|date:'d/m/y H:i' }}</p>
+    <p>Avatar:
+        {% if user.profile.avatar %}
+            <img src="{{ user.profile.avatar }}" alt="Avatar de {{ user.username }}" style="max-width: 150px; border-radius: 50%;">
+        {% else %}
+            Sem avatar
+        {% endif %}
+    </p>
+    <p>Bio: {{ user.profile.bio }}</p>
 
-    <a href="{% url "posts:index" %}">Voltar ao blog</a>
-    <a href="{% url "users:edit_profile" %}">Editar Perfil</a>
+    <a href="{% url "posts:index" %}" class="btn btn-secondary">Voltar ao blog</a>
+    <a href="{% url "users:edit_profile" %}" class="btn">Editar Perfil</a>
 {% endblock content %}
