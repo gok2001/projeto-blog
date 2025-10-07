@@ -2,18 +2,17 @@ from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, TemplateView, UpdateView
+from django.views import View
+from django.views.generic import TemplateView
 
-from .forms import ProfileForm, RegisterForm, RegisterUpdateForm
+from .forms import ProfileForm, RegisterForm
 
 
-class RegisterView(CreateView):
+class RegisterView(View):
     template_name = 'users/register.html'
-    success_url = reverse_lazy('users:login')
 
     def get(self, request, *args, **kwargs):
-        user_form = RegisterForm()
-        profile_form = ProfileForm()
+        user_form, profile_form = self.get_forms()
 
         return render(
             request,
@@ -25,8 +24,7 @@ class RegisterView(CreateView):
         )
 
     def post(self, request, *args, **kwargs):
-        user_form = RegisterForm(request.POST)
-        profile_form = ProfileForm(request.POST, request.FILES)
+        user_form, profile_form = self.get_forms(request.POST, request.FILES)
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -34,7 +32,7 @@ class RegisterView(CreateView):
             profile.user = user
             profile.save()
 
-            return redirect(self.success_url)
+            return redirect(reverse_lazy('users:login'))
 
         return render(
             request,
@@ -45,23 +43,33 @@ class RegisterView(CreateView):
             }
         )
 
+    def get_forms(self, data=None, files=None):
+        user_form = RegisterForm(data)
+        profile_form = ProfileForm(data, files)
+
+        return (user_form, profile_form)
+
 
 class Login(LoginView):
     template_name = 'users/login.html'
-    next_page = 'posts:index'
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return reverse_lazy('posts:index')
 
 
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'users/profile.html'
 
 
-class EditProfileView(LoginRequiredMixin, UpdateView):
+class EditProfileView(LoginRequiredMixin, View):
     template_name = 'users/edit_profile.html'
-    success_url = reverse_lazy('users:profile')
 
     def get(self, request, *args, **kwargs):
-        user_form = RegisterForm(instance=request.user)
-        profile_form = ProfileForm(instance=request.user.profile)
+        user_form, profile_form = self.get_forms(
+            user_instance=request.user,
+            profile_instance=request.user.profile
+        )
 
         return render(
             request,
@@ -73,8 +81,12 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
         )
 
     def post(self, request, *args, **kwargs):
-        user_form = RegisterForm(request.POST, instance=request.user)
-        profile_form = ProfileForm(request.POST, request.FILES, instance=request.user.profile)
+        user_form, profile_form = self.get_forms(
+            data=request.POST,
+            files=request.FILES,
+            user_instance=request.user,
+            profile_instance=request.user.profile
+        )
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
@@ -82,7 +94,7 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
             profile.user = user
             profile.save()
 
-            return redirect(self.success_url)
+            return redirect(reverse_lazy('users:profile'))
 
         return render(
             request,
@@ -92,3 +104,9 @@ class EditProfileView(LoginRequiredMixin, UpdateView):
                 'profile_form': profile_form,
             }
         )
+
+    def get_forms(self, data=None, files=None, user_instance=None, profile_instance=None):
+        user_form = RegisterForm(data, instance=user_instance)
+        profile_form = ProfileForm(data, files, instance=profile_instance)
+
+        return (user_form, profile_form)
