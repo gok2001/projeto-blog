@@ -42,23 +42,25 @@ class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
             return self.form_invalid(form)
 
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         post_id = self.kwargs.get('post_id')
         post = get_object_or_404(Post, id=post_id)
-        comments =  post.comments.filter(parent__isnull=True)
-        context = self.get_context_data(form=form, post=post, comments=comments)
+        comments = post.comments.filter(parent__isnull=True)
+        context = self.get_context_data(
+            form=form, post=post,
+            comments=comments
+        )
 
         if 'reply_form' not in context:
             context['reply_form'] = CommentForm()
 
         messages.error(
-            self.request, 
+            self.request,
             'Não foi possível salvar o comentário. Corrija os erros abaixo.'
         )
 
         return self.render_to_response(context)
-    
 
     def get_success_url(self):
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})
@@ -84,11 +86,11 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, 
             return self.form_invalid(form)
 
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         comment = self.get_object()
         post = comment.post
-        comments =  post.comments.filter(parent__isnull=True)
+        comments = post.comments.filter(parent__isnull=True)
         context = {
             'object': post,
             'post': post,
@@ -100,7 +102,7 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, 
         }
 
         messages.error(
-            self.request, 
+            self.request,
             'Não foi possível atualizar o comentário. Corrija os erros abaixo.'
         )
 
@@ -119,7 +121,7 @@ class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user == self.get_object().author or self.request.user.is_superuser
-    
+
     def get_success_url(self):
         messages.success(self.request, 'Comentário deletado com sucesso')
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})

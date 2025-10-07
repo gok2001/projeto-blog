@@ -15,7 +15,7 @@ class Category(models.Model):
 
     def post_count(self):
         return self.post_set.count()
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)
@@ -28,7 +28,7 @@ class Tag(models.Model):
 
     def post_count(self):
         return self.post_set.count()
-    
+
     def save(self, *args, **kwargs):
         if not self.slug:
             self.slug = slugify(self.name)

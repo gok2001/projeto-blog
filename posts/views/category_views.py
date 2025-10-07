@@ -11,8 +11,11 @@ class PostsByCategoryView(ListView):
     def get_queryset(self):
         category = get_object_or_404(Category, slug=self.kwargs['slug'])
         return Post.objects.filter(category=category)
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['category'] = get_object_or_404(Category, slug=self.kwargs['slug'])
+        context['category'] = get_object_or_404(
+            Category,
+            slug=self.kwargs['slug']
+        )
         return context

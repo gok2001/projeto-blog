@@ -49,7 +49,7 @@ class PostSearchView(ListView):
 
     def get_queryset(self):
         query = self.request.GET.get('q', '').strip()
-        
+
         if query:
             posts = Post.objects\
                 .filter(

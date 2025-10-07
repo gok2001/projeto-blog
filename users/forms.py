@@ -4,6 +4,8 @@ from django.contrib.auth import password_validation
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from .models import Profile
+
 
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
@@ -108,3 +110,8 @@ class RegisterUpdateForm(forms.ModelForm):
                 self.add_error('password1', ValidationError(errors))
 
         return password1
+    
+
+class ProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False)
+    bio = forms.CharField(widget=forms.Textarea)

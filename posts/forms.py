@@ -29,6 +29,9 @@ class CommentForm(forms.ModelForm):
         text = text.strip()
 
         if len(text) < 3:
-            raise ValidationError('Escreva uma mensagem um pouco mais longa.', code='min_length')
+            raise ValidationError(
+                'Escreva uma mensagem um pouco mais longa.',
+                code='min_length'
+            )
 
         return text
