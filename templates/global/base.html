@@ -26,6 +26,20 @@
         </div>
     </nav>
 
+    <div class="search">
+        <form action="{% url "posts:search" %}" method="GET">
+            <input
+            type="search"
+            class="search-input"
+            placeholder="Pesquisa por título, categoia ou tag"
+            id="search"
+            name="q"
+            value="{{ request.GET.q|default:'' }}"
+        >
+            <button type="submit">Buscar</button>
+        </form>
+    </div>
+
     {% block content %}{% endblock content %}
 </body>
 </html>
