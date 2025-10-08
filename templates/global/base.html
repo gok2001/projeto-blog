@@ -9,7 +9,7 @@
     <script src="{% static "global/scripts/scripts.js" %}"></script>
 </head>
 <body>
-    <nav>
+    <nav class="header-navbar">
         <a href="{% url "posts:index" %}" class="home-link">Home</a>
 
         <div class="nav-right">
@@ -52,5 +52,20 @@
     {% endif %}
 
     {% block content %}{% endblock content %}
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; {% now "Y" %} Meu Blog. Todos os direitos reservados.</p>
+            <nav>
+                <a href="{% url "posts:index" %}">Início</a> |
+                <a href="#">Sobre</a> |
+                <a href="#">Contato</a>
+            </nav>
+            <div class="social">
+                <a href="https://github.com/gok2001" target="_blank">GitHub</a>
+                <a href="https://www.linkedin.com/in/guilherme-orige-kernbichler-387899333" target="_blank">LinkedIn</a>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>
