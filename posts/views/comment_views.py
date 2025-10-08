@@ -14,7 +14,7 @@ class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
     model = Comment
     form_class = CommentForm
     template_name = 'posts/post_detail.html'
-    success_message = 'Comentário criado com sucesso'
+    success_message = 'Comentário criado com sucesso.'
 
     def form_valid(self, form):
         post_id = self.kwargs.get('post_id')
@@ -57,7 +57,7 @@ class CommentCreate(LoginRequiredMixin, SuccessMessageMixin, CreateView):
 
         messages.error(
             self.request,
-            'Não foi possível salvar o comentário. Corrija os erros abaixo.'
+            'Não foi possível salvar o comentário.'
         )
 
         return self.render_to_response(context)
@@ -70,7 +70,7 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, 
     model = Comment
     form_class = CommentForm
     template_name = 'posts/post_detail.html'
-    success_message = 'Comentário atualizado com sucesso'
+    success_message = 'Comentário atualizado com sucesso.'
 
     def form_valid(self, form):
         try:
@@ -103,7 +103,7 @@ class CommentEdit(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, 
 
         messages.error(
             self.request,
-            'Não foi possível atualizar o comentário. Corrija os erros abaixo.'
+            'Não foi possível atualizar o comentário.'
         )
 
         return self.render_to_response(context)
@@ -123,5 +123,5 @@ class CommentDelete(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == self.get_object().author or self.request.user.is_superuser
 
     def get_success_url(self):
-        messages.success(self.request, 'Comentário deletado com sucesso')
+        messages.success(self.request, 'Comentário deletado com sucesso.')
         return reverse_lazy('posts:detail', kwargs={'pk': self.object.post.pk})

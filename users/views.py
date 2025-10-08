@@ -35,8 +35,9 @@ class RegisterView(View):
             profile.save()
 
             messages.success(request, 'Conta criada com sucesso!')
-
             return redirect(reverse_lazy('users:login'))
+        else:
+            messages.error(request, 'Por favor, corrija os erros no formulário.')
 
         return render(
             request,
@@ -61,6 +62,10 @@ class Login(LoginView):
     def form_valid(self, form):
         messages.success(self.request, f'Bem-vindo, {form.get_user()}!')
         return super().form_valid(form)
+    
+    def form_invalid(self, form):
+        messages.error(self.request, 'Login inválido!')
+        return super().form_invalid(form)
 
     def get_success_url(self):
         return reverse_lazy('posts:index')
@@ -107,8 +112,9 @@ class EditProfileView(LoginRequiredMixin, View):
             profile.save()
 
             messages.success(request, 'Perfil atualizado com sucesso!')
-
             return redirect(reverse_lazy('users:profile'))
+        else:
+            messages.error(request, 'Não foi possível atualizar os dados.')
 
         return render(
             request,
