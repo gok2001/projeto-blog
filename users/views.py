@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -32,6 +33,8 @@ class RegisterView(View):
             profile.user = user
             profile.save()
 
+            messages.success(request, 'Conta criada com sucesso!')
+
             return redirect(reverse_lazy('users:login'))
 
         return render(
@@ -53,6 +56,10 @@ class RegisterView(View):
 class Login(LoginView):
     template_name = 'users/login.html'
     redirect_authenticated_user = True
+
+    def form_valid(self, form):
+        messages.success(self.request, f'Bem-vindo, {form.get_user()}!')
+        return super().form_valid(form)
 
     def get_success_url(self):
         return reverse_lazy('posts:index')
@@ -93,6 +100,8 @@ class EditProfileView(LoginRequiredMixin, View):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
+
+            messages.success(request, 'Perfil atualizado com sucesso!')
 
             return redirect(reverse_lazy('users:profile'))
 
