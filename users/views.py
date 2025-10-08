@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, redirect
@@ -97,6 +98,10 @@ class EditProfileView(LoginRequiredMixin, View):
 
         if user_form.is_valid() and profile_form.is_valid():
             user = user_form.save()
+            
+            if user_form.cleaned_data.get('password1'):
+                update_session_auth_hash(request, user)
+
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
