@@ -1,16 +1,6 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    {% if messages %}
-        <div class="messages-container">
-            {% for message in messages %}
-            <div class="message {{ message.tags }}">
-                {{ message }}
-            </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-
     <main class="post-content">
         <h1>{{ post.title }}</h1>
         <p>{{ post.content }}</p>

@@ -26,3 +26,9 @@ function toggleForm(formId, parentId) {
         buttons.forEach(btn => btn.style.display = 'inline-block');
     }
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.message').forEach(msg => {
+        setTimeout(() => msg.remove(), 4000);
+    });
+});
