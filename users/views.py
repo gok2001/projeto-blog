@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 
-from .forms import ProfileForm, RegisterForm
+from .forms import EditUserForm, ProfileForm, RegisterForm
 
 
 class RegisterView(View):
@@ -115,7 +115,7 @@ class EditProfileView(LoginRequiredMixin, View):
         )
 
     def get_forms(self, data=None, files=None, user_instance=None, profile_instance=None):
-        user_form = RegisterForm(data, instance=user_instance)
+        user_form = EditUserForm(data, instance=user_instance)
         profile_form = ProfileForm(data, files, instance=profile_instance)
 
         return (user_form, profile_form)
