@@ -231,7 +231,7 @@ input[type="search"]:focus, textarea:focus {
 .messages-container {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: var(--spacing-md);
     margin: 15px auto;
     max-width: 500px;
 }
@@ -401,6 +401,60 @@ input[type="search"]:focus, textarea:focus {
     border-left-color: var(--color-secondary);
     margin-left: 20px;
     margin-top: var(--spacing-md);
+}
+
+/* ===============================
+   PERFIL PESSOAL
+   =============================== */
+.profile-info {
+    background-color: var(--card-bg);
+    border-radius: var(--radius-lg);
+    border: var(--input-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    margin: var(--spacing-md) auto;
+    padding: var(--padding-sm) 0;
+}
+
+.profile-info h1 {
+    font-size: 1.4rem;
+    margin-bottom: var(--spacing-xs);
+    color: var(--color-primary);
+}
+
+.profile-info p {
+    margin: var(--spacing-xs) 0;
+    color: var(--color-text);
+}
+
+.profile-btns {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-md);
+    margin: var(--spacing-md) auto;
+}
+
+.profile-avatar img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: var(--spacing-sm);
+    border: 2px solid var(--color-primary);
+}
+
+.avatar-placeholder {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: var(--color-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text-muted);
+    font-size: 0.85rem;
 }
 
 /* ===============================
