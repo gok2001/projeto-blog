@@ -9,7 +9,7 @@
         {% else %}
             <h1>Todas as postagens</h1>
         {% endif %}
-        <main class="posts-container">
+        <div class="posts-container">
             {% for post in posts %}
                 <article class="post-card">
                     <img src="#" alt="Imagem do post">
@@ -18,6 +18,6 @@
                     <a href="{% url "posts:detail" post.pk %}" class="btn">Leia mais</a>
                 </article>
             {% endfor %}
-        </main>
+        </div>
     </div>
 {% endblock content %}
