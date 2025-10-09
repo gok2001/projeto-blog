@@ -523,6 +523,65 @@ input[type="search"]:focus, textarea:focus {
 }
 
 /* ===============================
+   FOOTER
+   =============================== */
+footer {
+    background-color: var(--color-bg-alt);
+    border-top: var(--input-border);
+    padding: var(--padding-lg) var(--padding-md);
+    margin-top: var(--padding-lg);
+    color: var(--color-text-muted);
+    text-align: center;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.footer-content nav {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+}
+
+.footer-content nav a {
+    color: var(--color-primary);
+    font-size: 0.9rem;
+}
+
+.footer-content nav a:hover {
+    color: var(--color-primary-hover);
+    text-decoration: underline;
+}
+
+.footer-content .social {
+    display: flex;
+    gap: var(--spacing-md);
+}
+
+.footer-content .social a {
+    color: var(--color-text-muted);
+    font-size: 0.9rem;
+    transition: var(--transition-normal);
+}
+
+.footer-content .social a:hover {
+    color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+/* ===============================
    MEDIA QUERIES (RESPONSIVIDADE)
    =============================== */
 @media (max-width: 1024px) {
@@ -597,5 +656,20 @@ input[type="search"]:focus, textarea:focus {
 
     .post-content {
         max-width: 400px;
+    }
+
+    .footer-content {
+        gap: var(--spacing-sm);
+    }
+
+    .footer-content nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-content .social {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-xs);
     }
 }
