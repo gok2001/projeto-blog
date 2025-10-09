@@ -2,26 +2,26 @@
     /* ===============================
         🎨 CORES
         =============================== */
-    --color-bg: #121212;             /* fundo principal */
-    --color-bg-alt: #1e1e1e;         /* fundo de elementos (cards, boxes, etc) */
-    --color-bg-alt-hover: #ffffff05; /* hover cards */
-    --color-border: #2a2a2a;         /* bordas sutis */
+    --color-bg: #18181b;
+    --color-bg-alt: #232329;
+    --color-bg-alt-hover: #2f2f37;
+    --color-border: #34343c;
 
-    --color-text: #e0e0e0;           /* texto padrão */
-    --color-text-muted: #aaaaaa;     /* texto secundário */
-    --color-heading: #ffffff;        /* títulos */
+    --color-text: #e4e4e7;
+    --color-text-muted: #a1a1aa;
+    --color-heading: #ffffff;
 
-    --color-primary: #4f46e5;
-    --color-primary-hover: #6366f1;
+    --color-primary: #6366f1;
+    --color-primary-hover: #818cf8;
     --color-secondary: #ec4899;
-    --color-secondary-hover: #db2777;
+    --color-secondary-hover: #f472b6;
 
     --color-success: #22c55e;
     --color-warning: #facc15;
     --color-danger: #ef4444;
-    --color-danger-hover: #b91c1c;
+    --color-danger-hover: #dc2626;
 
-    --color-box-shadow-input: #4f46e54d;
+    --color-box-shadow-input: #6366f14d;
 
     /* ===============================
      🔠 TIPOGRAFIA
@@ -55,14 +55,12 @@
     --transition-smooth: all 0.3s ease-in-out;
 
     --input-border: 1px solid var(--color-border);
-    --card-bg: var(--color-bg-alt);
-    --card-hover-bg: var(--color-bg-alt-hover);
 
     /* ===============================
      🎭 SOMBRAS
      =============================== */
-    --shadow-md: 0 2px 8px rgba(0,0,0,0.4);
-    --shadow-lg: 0 4px 16px rgba(0,0,0,0.5);
+    --shadow-md: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 4px 16px rgba(0, 0, 0, 0.5);
 }
 
 
@@ -88,13 +86,20 @@ body {
 a {
     color: var(--color-primary);
     text-decoration: none;
+    transition: var(--transition-normal);
 }
 
 a:hover {
+    color: var(--color-primary-hover);
     text-decoration: underline;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     color: var(--color-heading);
     font-weight: bold;
     margin-bottom: 0.5em;
@@ -147,35 +152,44 @@ img:hover {
 /* ===============================
    BOTÕES
    =============================== */
-.btn {
+.btn,
+a.btn {
+    display: inline-block;
     padding: var(--padding-sm) var(--padding-md);
     font-size: var(--font-size-base);
+    font-weight: 500;
     background-color: var(--color-primary);
-    color: var(--color-text);
+    color: #fff;
     border: none;
     border-radius: var(--radius-sm);
     cursor: pointer;
     transition: var(--transition-normal);
+    text-decoration: none !important;
 }
 
-.btn:hover {
+.btn:hover,
+a.btn:hover {
     background-color: var(--color-primary-hover);
     transform: translateY(-2px);
 }
 
-.btn-secondary {
+.btn-secondary,
+a.btn-secondary {
     background-color: var(--color-secondary);
 }
 
-.btn-secondary:hover {
+.btn-secondary:hover,
+a.btn-secondary:hover {
     background-color: var(--color-secondary-hover);
 }
 
-.btn-danger {
+.btn-danger,
+a.btn-danger {
     background-color: var(--color-danger);
 }
 
-.btn-danger:hover {
+.btn-danger:hover,
+a.btn-danger:hover {
     background-color: var(--color-danger-hover);
 }
 
@@ -196,7 +210,8 @@ img:hover {
 /* ===============================
    FORMULÁRIOS
    =============================== */
-input[type="search"], textarea {
+input[type="search"],
+textarea {
     width: 100%;
     padding: var(--padding-sm);
     border-radius: var(--radius-sm);
@@ -207,7 +222,8 @@ input[type="search"], textarea {
     transition: var(--transition-normal);
 }
 
-input[type="search"]:focus, textarea:focus {
+input[type="search"]:focus,
+textarea:focus {
     border-color: var(--color-primary);
     box-shadow: 0 0 0 2px var(--color-box-shadow-input);
     outline: none;
@@ -268,8 +284,15 @@ input[type="search"]:focus, textarea:focus {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-5px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* ===============================
@@ -366,7 +389,8 @@ input[type="search"]:focus, textarea:focus {
     margin: 0 2px;
 }
 
-.comment, .reply {
+.comment,
+.reply {
     background-color: var(--card-bg);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
@@ -376,7 +400,8 @@ input[type="search"]:focus, textarea:focus {
     transition: var(--transition-normal);
 }
 
-.comment:hover, .reply:hover {
+.comment:hover,
+.reply:hover {
     transform: translateY(-2px);
     box-shadow: var(--shadow-lg);
 }
@@ -401,7 +426,8 @@ input[type="search"]:focus, textarea:focus {
     white-space: pre-wrap;
 }
 
-.edit-form, .reply-form {
+.edit-form,
+.reply-form {
     background-color: var(--card-bgt);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
