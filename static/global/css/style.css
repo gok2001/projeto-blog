@@ -6,8 +6,8 @@
         =============================== */
 
     --color-primary: #1E3A8A;
-    --color-secondary: #3B82F6;
-    --color-accent: #6366F1;
+    --color-secondary: #2563EB;
+    --color-accent: #3B82F6;
 
     --color-light-bg: #F9FAFB;
     --color-card-bg: #FFFFFF;
@@ -16,9 +16,9 @@
     --color-text-light: #6B7280;
 
     --color-error: #EF4444;
+    --color-error-dark: #b91c1c;
     --color-success: #10B981;
     --color-warning: #F59E0B;
-    --color-info: #3B82F6;
 
     /* ===============================
      🔠 TIPOGRAFIA
@@ -68,6 +68,8 @@
     --transition-medium: 0.25s ease-in-out;
     --transition-slow: 0.4s ease-in-out;
 
+    --avatar-size: 150px;
+
     /* ===============================
        📱 LARGURAS RESPONSIVAS
        =============================== */
@@ -88,9 +90,13 @@
     box-sizing: border-box;
 }
 
-html,
-body {
-    height: 100%;
+:focus {
+    outline: 3px solid rgba(59, 130, 246, 0.25);
+    outline-offset: 3px;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
 }
 
 body {
@@ -221,44 +227,39 @@ img:hover {
    =============================== */
 .btn,
 a.btn {
+    --btn-bg: var(--color-primary);
+    --btn-bg-hover: var(--color-accent);
+    --btn-color: #fff;
+
     display: inline-block;
     padding: var(--spacing-xs) var(--spacing-md);
     font-size: var(--font-size-md);
     font-weight: var(--font-weight-medium);
-    background-color: var(--color-primary);
-    color: #fff;
+    background-color: var(--btn-bg);
+    color: var(--btn-color);
     border: none;
     border-radius: var(--border-radius-md);
     cursor: pointer;
     transition: background-color var(--transition-medium), transform var(--transition-medium);
-    text-decoration: none !important;
+    text-decoration: none;
 }
 
 .btn:hover,
 a.btn:hover {
-    background-color: var(--color-accent);
+    background-color: var(--btn-bg-hover);
     transform: translateY(-2px);
 }
 
 .btn-secondary,
 a.btn-secondary {
-    background-color: var(--color-secondary);
-}
-
-.btn-secondary:hover,
-a.btn-secondary:hover {
-    background-color: var(--color-accent);
+    --btn-bg: var(--color-secondary);
+    --btn-bg-hover: var(--color-accent);
 }
 
 .btn-danger,
 a.btn-danger {
-    background-color: var(--color-error);
-}
-
-.btn-danger:hover,
-a.btn-danger:hover {
-    background-color: #b91c1c; /* vermelho mais escuro */
-    transform: translateY(-2px);
+    --btn-bg: var(--color-error);
+    --btn-bg-hover: var(--color-error-dark);
 }
 
 .btn-close {
@@ -375,7 +376,7 @@ textarea:focus {
     padding: 0 var(--spacing-md);
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: var(--font-size-xxl);
+    gap: var(--spacing-xl);
 }
 
 .post-card {
@@ -427,10 +428,6 @@ textarea:focus {
     gap: var(--spacing-md);
 }
 
-.post-content p {
-    margin-bottom: var(--spacing-md);
-}
-
 /* ===============================
    COMENTÁRIOS
    =============================== */
@@ -445,7 +442,6 @@ textarea:focus {
 .comment-section .btn {
     font-size: var(--font-size-sm);
     padding: var(--spacing-xxs) var(--spacing-xs);
-    margin: 0 var(--spacing-xxs);
 }
 
 .comment,
@@ -456,7 +452,7 @@ textarea:focus {
     border-left: 4px solid var(--color-primary);
     box-shadow: var(--shadow-md);
     margin-bottom: var(--spacing-md);
-    transition: var(--transition-medium);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium);
 }
 
 .comment:hover,
@@ -497,7 +493,6 @@ textarea:focus {
 
 .reply {
     border-left-color: var(--color-secondary);
-    margin-left: var(--spacing-lg);
     margin-top: var(--spacing-md);
 }
 
@@ -522,11 +517,6 @@ textarea:focus {
     color: var(--color-primary);
 }
 
-.profile-info p {
-    margin: var(--spacing-xxs) 0;
-    color: var(--color-text);
-}
-
 .profile-btns {
     display: flex;
     justify-content: center;
@@ -535,8 +525,8 @@ textarea:focus {
 }
 
 .profile-avatar img {
-    width: 150px;
-    height: 150px;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     border-radius: var(--border-radius-full);
     object-fit: cover;
     margin-bottom: var(--spacing-xs);
@@ -544,15 +534,15 @@ textarea:focus {
 }
 
 .avatar-placeholder {
-    width: 150px;
-    height: 150px;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
     border-radius: var(--border-radius-full);
     background: var(--color-light-bg);
     display: flex;
     align-items: center;
     justify-content: center;
     color: var(--color-text-light);
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-sm);
 }
 
 /* ===============================
@@ -584,8 +574,6 @@ textarea:focus {
     padding: var(--spacing-xs) var(--spacing-sm);
     border-radius: var(--border-radius-md);
     border: 1px solid var(--color-border);
-    background-color: var(--color-card-bg);
-    color: var(--color-text);
     font-size: var(--font-size-md);
     transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
 }
@@ -599,7 +587,6 @@ textarea:focus {
     font-weight: var(--font-weight-medium);
     margin-bottom: var(--spacing-xxs);
     display: block;
-    color: var(--color-text);
 }
 
 .login-form .btn {
@@ -657,7 +644,7 @@ footer {
 
 .footer-content nav a:not(:last-child)::after {
     content: "|";
-    margin: 0 var(--spacing-xs);
+    margin: 0 var(--spacing-xxs);
     color: var(--color-text-light);
 }
 
@@ -739,6 +726,7 @@ footer {
         margin: var(--spacing-xxl) auto;
         padding: var(--spacing-md);
     }
+}
 
 @media (max-width: 768px) {
     .header-navbar {
@@ -772,8 +760,7 @@ footer {
 
     .comment,
     .reply {
-        padding: 0.75rem;
-        margin-left: 0;
+        padding: var(--spacing-sm);
     }
 
     .profile-info {
