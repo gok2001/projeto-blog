@@ -1,33 +1,36 @@
 from django import forms
+from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
-
-from .models import Profile
 
 
 class RegisterForm(UserCreationForm):
+    username = forms.CharField(
+        max_length=30,
+        min_length=8,
+        required=True,
+        help_text='Apenas letras e números, sem espaços',
+        strip=True,
+        error_messages={
+            'max_length': 'Nome de usuário muito grande',
+            'min_length': 'Nome de usuário muito pequeno',
+            'required': 'Campo obrigatório',
+        }
+    )
+
     class Meta:
-        model = User
+        model = get_user_model()
         fields = (
             'username', 'email', 'password1', 'password2'
         )
 
     def clean_email(self):
+        model = self.Meta.model
         email = self.cleaned_data.get('email')
 
-        if User.objects.filter(email=email).exists():
+        if model.objects.filter(email=email).exists():
             raise forms.ValidationError('Este email já está em uso.')
 
         return email
-
-
-class ProfileForm(forms.ModelForm):
-    class Meta:
-        model = Profile
-        fields = ('avatar', 'bio',)
-        widgets = {
-            'bio': forms.Textarea(),
-        }
 
 
 class EditUserForm(forms.ModelForm):
@@ -44,13 +47,17 @@ class EditUserForm(forms.ModelForm):
     )
 
     class Meta:
-        model = User
-        fields = ('username', 'email')
+        model = get_user_model()
+        fields = ('username', 'email', 'avatar', 'bio',)
+        widgets = {
+            'bio': forms.Textarea(),
+        }
 
     def clean_email(self):
+        model = self.Meta.model
         email = self.cleaned_data.get('email')
 
-        if User.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
+        if model.objects.filter(email=email).exclude(pk=self.instance.pk).exists():
             raise forms.ValidationError('Este email já está em uso.')
 
         return email
@@ -68,7 +75,7 @@ class EditUserForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        pw = self.cleaned_data.get('password1')
+        pw = self.cleaned_data.get('password1', '')
 
         if pw:
             user.set_password(pw)
