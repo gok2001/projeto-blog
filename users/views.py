@@ -7,34 +7,30 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 
-from .forms import EditUserForm, ProfileForm, RegisterForm
+from .forms import EditUserForm, RegisterForm
 
 
 class RegisterView(View):
     template_name = 'users/register.html'
 
     def get(self, request, *args, **kwargs):
-        user_form, profile_form = self.get_forms()
+        user_form = self.get_forms()
 
         return render(
             request,
             self.template_name,
             {
                 'user_form': user_form,
-                'profile_form': profile_form,
             }
         )
 
     def post(self, request, *args, **kwargs):
-        user_form, profile_form = self.get_forms(request.POST, request.FILES)
+        user_form = self.get_forms(request.POST, request.FILES)
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
-
+        if user_form.is_valid():
+            user_form.save()
             messages.success(request, 'Conta criada com sucesso!')
+
             return redirect(reverse_lazy('users:login'))
         else:
             messages.error(request, 'Por favor, corrija os erros no formulário.')
@@ -44,15 +40,13 @@ class RegisterView(View):
             self.template_name,
             {
                 'user_form': user_form,
-                'profile_form': profile_form,
             }
         )
 
     def get_forms(self, data=None, files=None):
-        user_form = RegisterForm(data)
-        profile_form = ProfileForm(data, files)
+        user_form = RegisterForm(data, files)
 
-        return (user_form, profile_form)
+        return user_form
 
 
 class Login(LoginView):
@@ -79,9 +73,8 @@ class EditProfileView(LoginRequiredMixin, View):
     template_name = 'users/edit_profile.html'
 
     def get(self, request, *args, **kwargs):
-        user_form, profile_form = self.get_forms(
+        user_form = self.get_forms(
             user_instance=request.user,
-            profile_instance=request.user.profile
         )
 
         return render(
@@ -89,27 +82,22 @@ class EditProfileView(LoginRequiredMixin, View):
             self.template_name,
             {
                 'user_form': user_form,
-                'profile_form': profile_form,
             }
         )
 
     def post(self, request, *args, **kwargs):
-        user_form, profile_form = self.get_forms(
+        user_form = self.get_forms(
             data=request.POST,
             files=request.FILES,
             user_instance=request.user,
             profile_instance=request.user.profile
         )
 
-        if user_form.is_valid() and profile_form.is_valid():
-            user = user_form.save()
+        if user_form.is_valid():
+            user_form.save()
             
             if user_form.cleaned_data.get('password1'):
-                update_session_auth_hash(request, user)
-
-            profile = profile_form.save(commit=False)
-            profile.user = user
-            profile.save()
+                update_session_auth_hash(request)
 
             messages.success(request, 'Perfil atualizado com sucesso!')
             return redirect(reverse_lazy('users:profile'))
@@ -121,12 +109,10 @@ class EditProfileView(LoginRequiredMixin, View):
             self.template_name,
             {
                 'user_form': user_form,
-                'profile_form': profile_form,
             }
         )
 
-    def get_forms(self, data=None, files=None, user_instance=None, profile_instance=None):
-        user_form = EditUserForm(data, instance=user_instance)
-        profile_form = ProfileForm(data, files, instance=profile_instance)
+    def get_forms(self, data=None, files=None, user_instance=None):
+        user_form = EditUserForm(data, files, user_instance)
 
-        return (user_form, profile_form)
+        return user_form
