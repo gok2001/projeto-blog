@@ -15,7 +15,7 @@
                     <img src="#" alt="Imagem do post">
                     <h2>{{ post.title }}</h2>
                     <p>{{ post.summary }}</p>
-                    <a href="{% url "posts:detail" post.pk %}" class="btn">Leia mais</a>
+                    <a href="{% url "posts:detail" post.pk %}" class="btn-base btn-primary">Leia mais</a>
                 </article>
             {% endfor %}
         </div>

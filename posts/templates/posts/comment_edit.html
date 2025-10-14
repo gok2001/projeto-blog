@@ -1,8 +1,8 @@
 <div class="edit-form" {% if edit_comment_id != comment.id %}style="display: none;"{% endif %} id="edit-form-{{ comment.id }}">
-    <form action="{% url "posts:comment_edit" comment.id %}" method="POST">
+    <form action="{% url "posts:comment_edit" comment.id %}" method="POST" class="form-base">
         {% csrf_token %}
 
-        <textarea name="text" rows="5">{{ comment.text }}</textarea>
-        <button type="submit" class="btn btn-secondary">Salvar</button>
+        <textarea name="text" rows="5" class="input-base">{{ comment.text }}</textarea>
+        <button type="submit" class="btn-base btn-secondary">Salvar</button>
     </form>
 </div>

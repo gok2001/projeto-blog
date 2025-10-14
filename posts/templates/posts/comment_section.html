@@ -21,7 +21,7 @@
                 <button
                     type="button"
                     onclick="toggleForm('reply-form-{{ comment.id }}', 'comment-{{ comment.id}}')"
-                    class="reply-btn btn"
+                    class="btn-base btn-primary reply-btn"
                 >
                     Responder
                 </button>
@@ -30,7 +30,7 @@
                     <button
                         type="button"
                         onclick="toggleForm('edit-form-{{ comment.id }}', 'comment-{{ comment.id }}')"
-                        class="edit-btn btn btn-secondary"
+                        class="btn-base btn-secondary edit-btn"
                     >
                         Editar
                     </button>
@@ -38,7 +38,7 @@
                     <form action="{% url "posts:comment_delete" comment.id %}" method="POST" style="display: inline;">
                         {% csrf_token %}
 
-                        <button type="submit" class="delete-btn btn btn-danger">Deletar</button>
+                        <button type="submit" class="btn-base btn-danger delete-btn">Deletar</button>
                     </form>
                 {% endif %}
                 
@@ -53,7 +53,7 @@
     <div class="comment-form">
         <h3>Adicionar comentário</h3>
 
-        <form action="{% url "posts:comment_create" post.id %}" method="POST">
+        <form action="{% url "posts:comment_create" post.id %}" method="POST" class="form-base">
             {% csrf_token %}
             
             <div class="form-group">
@@ -69,7 +69,7 @@
 
             {{ form.parent_id }}
 
-            <button type="submit" class="btn">Comentar</button>
+            <button type="submit" class="btn-base btn-primary">Comentar</button>
         </form>
     </div>
 </div>

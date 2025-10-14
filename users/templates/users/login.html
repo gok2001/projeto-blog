@@ -3,10 +3,11 @@
 {% block content %}
     <div class="login-content">
         <h1>Login</h1>
-        <form action="{% url "users:login" %}" method="POST" class="login-form">
+        <form action="{% url "users:login" %}" method="POST" class="form-base login-form">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit" class="btn">Login</button>
+
+            <button type="submit" class="btn-base btn-primary">Login</button>
         </form>
     </div>
 {% endblock content %}

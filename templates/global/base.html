@@ -18,7 +18,7 @@
                     <a href="{% url "users:profile" %}">Meu perfil</a>
                     <form action="{% url "users:logout" %}" method="POST">
                         {% csrf_token %}
-                        <button type="submit" class="btn">Logout</button>
+                        <button type="submit" class="btn-base btn-primary">Logout</button>
                     </form>
                 {% else %}
                     <a href="{% url "users:login" %}">Login</a>
@@ -37,7 +37,7 @@
                 name="q"
                 value="{{ request.GET.q|default:'' }}"
             >
-                <button type="submit" class="btn">Buscar</button>
+                <button type="submit" class="btn-base btn-primary">Buscar</button>
             </form>
         </div>
     </header>

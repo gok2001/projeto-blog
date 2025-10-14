@@ -16,18 +16,18 @@
             <form action="{% url "posts:comment_delete" reply.id %}" method="POST" style="display: inline;">
                 {% csrf_token %}
 
-                <button type="submit" class="btn btn-danger">Deletar</button>
+                <button type="submit" class="btn-base btn-danger">Deletar</button>
             </form>
         {% endif %}
     </div>
 {% endfor %}
 
 <div class="reply-form" id="reply-form-{{ comment.id }}" style="display: none;">
-    <form action="{% url "posts:comment_create" post.id %}" method="POST">
+    <form action="{% url "posts:comment_create" post.id %}" method="POST" class="form-base">
         {% csrf_token %}
 
         {{ reply_form.text }}
         <input type="hidden" name="parent_id" value="{{ comment.id }}">
-        <button type="submit" class="btn">Responder</button>
+        <button type="submit" class="btn-base btn-primary">Responder</button>
     </form>
 </div>

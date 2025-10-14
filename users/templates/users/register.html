@@ -4,11 +4,23 @@
     <div class="register-content">
         <h1>Crie sua conta</h1>
 
-        <form action="{% url "users:register" %}" method="POST" enctype="multipart/form-data" class="register-form">
+        <form action="{% url "users:register" %}" method="POST" enctype="multipart/form-data" class="form-base register-form">
             {% csrf_token %}
-            {{ user_form.as_p }}
-            
-            <button type="submit" class="btn">Registrar</button>
+
+            {% for field in user_form %}
+                <div class="register-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help-text">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="error-text">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <button type="submit" class="btn-base btn-primary">Registrar</button>
         </form>
     </div>
 {% endblock content %}

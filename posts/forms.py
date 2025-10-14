@@ -21,6 +21,8 @@ class CommentForm(forms.ModelForm):
                 'maxlength': 500,
                 'rows': 5,
                 'placeholder': 'Escreva seu comentário aqui...',
+                'class': 'input-base'
+                
             }),
         }
 

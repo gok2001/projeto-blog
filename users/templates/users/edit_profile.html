@@ -3,9 +3,8 @@
 {% block content %}
     <form action="{% url "users:edit_profile" %}" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-
         {{ user_form.as_p }}
-        {{ profile_form.as_p }}
+        
         <button type="submit">Editar</button>
     </form>
 {% endblock content %}

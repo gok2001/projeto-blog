@@ -8,6 +8,7 @@ class RegisterForm(forms.ModelForm):
         required=True,
         help_text='Apenas letras e números, sem espaços.',
         strip=True,
+        widget=forms.TextInput(attrs={'class': 'input-base'}),
         error_messages={
             'max_length': 'Nome de usuário muito grande. (máx: 30 caracteres)',
             'min_length': 'Nome de usuário muito pequeno. (mín: 8 caracteres)',
@@ -18,15 +19,16 @@ class RegisterForm(forms.ModelForm):
     email = forms.EmailField(
         required=True,
         help_text='Digite um email válido.',
+        widget=forms.EmailInput(attrs={'class': 'input-base'}),
         error_messages={
             'required': 'Campo obrigatório!',
-            'invalid': 'Digite um email válido'
+            'invalid': 'Digite um email válido.'
         },
     )
 
     password1 = forms.CharField(
         label='Senha',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'input-base'}),
         required=True,
         help_text='- Sua senha não pode ser muito parecida com outra informação pessoal. \
                     \n- Sua senha precisa ter pelo menos 8 caracteres. \
@@ -37,11 +39,22 @@ class RegisterForm(forms.ModelForm):
 
     password2 = forms.CharField(
         label='Confirma senha',
-        widget=forms.PasswordInput(),
+        widget=forms.PasswordInput(attrs={'class': 'input-base'}),
         required=True,
         help_text='Digite a mesma senha novamente.',
         strip=False,
     )
+
+    avatar = forms.ImageField(
+        widget=forms.FileInput(attrs={'class': 'input-base'}),
+        required=False,
+    )
+
+    bio = forms.CharField(
+        widget=forms.Textarea(attrs={'class': 'input-base'}),
+        required=False,
+    )
+
 
     class Meta:
         model = get_user_model()
