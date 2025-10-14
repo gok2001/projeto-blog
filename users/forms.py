@@ -28,10 +28,10 @@ class RegisterForm(forms.ModelForm):
         label='Senha',
         widget=forms.PasswordInput(),
         required=True,
-        help_text=' Sua senha não pode ser muito parecida com outra informação pessoal. \
-                    Sua senha precisa ter pelo menos 8 caracteres. \
-                    Sua senha não pode ser uma senha muito comum. \
-                    Sua senha não pode ser inteiramente numérica.',
+        help_text='- Sua senha não pode ser muito parecida com outra informação pessoal. \
+                    \n- Sua senha precisa ter pelo menos 8 caracteres. \
+                    \n- Sua senha não pode ser uma senha muito comum. \
+                    \n- Sua senha não pode ser inteiramente numérica.',
         strip=False,
     )
 
@@ -67,7 +67,7 @@ class RegisterForm(forms.ModelForm):
             raise forms.ValidationError('Este email já está em uso.')
 
         return email
-    
+
     def clean_password1(self):
         password1 = self.cleaned_data.get('password1')
         user = self.instance
@@ -110,7 +110,7 @@ class RegisterForm(forms.ModelForm):
             if password1 != password2:
                 raise forms.ValidationError('Senhas não batem')
 
-        return password2    
+        return password2
 
 
 class EditUserForm(forms.ModelForm):

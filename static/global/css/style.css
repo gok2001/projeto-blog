@@ -31,7 +31,8 @@
     --font-size-md: 1rem;
     --font-size-lg: 1.25rem;
     --font-size-xl: 1.5rem;
-    --font-size-xxl: 2rem;
+    --font-size-xxl: 1.75rem;
+    --font-size-xxxl: 2rem;
 
     --font-weight-light: 300;
     --font-weight-regular: 400;
@@ -512,7 +513,7 @@ textarea:focus {
 }
 
 .profile-info h1 {
-    font-size: var(--font-size-xl);
+    font-size: var(--font-size-xxxl);
     margin-bottom: var(--spacing-xxs);
     color: var(--color-primary);
 }
@@ -605,6 +606,98 @@ textarea:focus {
 /* ===============================
    FOOTER
    =============================== */
+.register-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: var(--container-width-md);
+    margin: var(--spacing-xl) auto;
+    padding: 0 var(--spacing-md);
+}
+
+.register-content h1 {
+    color: var(--color-primary);
+    font-size: var(--font-size-xxxl);
+    margin-bottom: var(--spacing-lg);
+    text-align: center;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xs);
+    width: var(--container-width-sm);
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+    background-color: var(--color-card-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.register-form p {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-xxs);
+    margin-bottom: var(--spacing-sm);
+    width: 100%;
+    max-width: 350px;
+}
+
+.register-form label {
+    font-weight: var(--font-weight-medium);
+    margin-bottom: 0;
+}
+
+.register-form input,
+.register-form textarea {
+    width: 100%;
+    max-width: 350px;
+    align-self: center;
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--color-border);
+    font-size: var(--font-size-md);
+    transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.register-form input:focus,
+.register-form textarea:focus {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-md);
+}
+
+.register-form input[type="file"] {
+    border: none;
+    background: none;
+    padding: 0;
+    margin-top: var(--spacing-xs);
+    color: var(--color-text-light);
+    font-size: var(--font-size-sm);
+}
+
+.register-form textarea {
+    resize: none;
+}
+
+.register-form .btn {
+    width: 100%;
+    max-width: 220px;
+    padding: var(--spacing-xs);
+    margin-top: var(--spacing-md);
+    font-size: var(--font-size-md);
+}
+
+.register-form .helptext {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-light);
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+
+/* ===============================
+   FOOTER
+   =============================== */
 footer {
     background-color: var(--color-card-bg);
     color: var(--color-text-light);
@@ -676,7 +769,7 @@ footer {
     }
 
     h1 {
-        font-size: var(--font-size-xxl);
+        font-size: var(--font-size-xxxl);
     }
 
     .posts-container {
@@ -735,7 +828,7 @@ footer {
     }
 
     h1 {
-        font-size: 1.8rem;
+        font-size: var(--font-size-xxl);
     }
 
     .posts-container {
@@ -784,6 +877,29 @@ footer {
 
     .login-form input {
         width: 100%;
+    }
+
+    .register-content h1 {
+        font-size: var(--font-size-xxl);
+    }
+
+    .register-form {
+        width: 90%;
+        max-width: 400px;
+        padding: var(--spacing-md);
+    }
+
+    .register-form p {
+        max-width: 100%;
+    }
+
+    .register-form input,
+    .register-form textarea {
+        max-width: 100%;
+    }
+
+    .register-form .btn {
+        max-width: 100%;
     }
 
     .footer-content {
