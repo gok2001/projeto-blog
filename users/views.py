@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 
-from .forms import EditUserForm, RegisterForm
+from .forms import EditUserForm, RegisterUserForm
 
 
 class RegisterView(View):
@@ -33,7 +33,10 @@ class RegisterView(View):
 
             return redirect(reverse_lazy('users:login'))
         else:
-            messages.error(request, 'Por favor, corrija os erros no formulário.')
+            messages.error(
+                request,
+                'Por favor, corrija os erros no formulário.'
+            )
 
         return render(
             request,
@@ -44,7 +47,7 @@ class RegisterView(View):
         )
 
     def get_forms(self, data=None, files=None):
-        user_form = RegisterForm(data, files)
+        user_form = RegisterUserForm(data, files)
 
         return user_form
 
@@ -56,7 +59,7 @@ class Login(LoginView):
     def form_valid(self, form):
         messages.success(self.request, f'Bem-vindo, {form.get_user()}!')
         return super().form_valid(form)
-    
+
     def form_invalid(self, form):
         messages.error(self.request, 'Login inválido!')
         return super().form_invalid(form)
@@ -74,7 +77,7 @@ class EditProfileView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         user_form = self.get_forms(
-            user_instance=request.user,
+            instance=request.user,
         )
 
         return render(
@@ -89,13 +92,12 @@ class EditProfileView(LoginRequiredMixin, View):
         user_form = self.get_forms(
             data=request.POST,
             files=request.FILES,
-            user_instance=request.user,
-            profile_instance=request.user.profile
+            instance=request.user,
         )
 
         if user_form.is_valid():
             user_form.save()
-            
+
             if user_form.cleaned_data.get('password1'):
                 update_session_auth_hash(request)
 
@@ -112,7 +114,12 @@ class EditProfileView(LoginRequiredMixin, View):
             }
         )
 
-    def get_forms(self, data=None, files=None, user_instance=None):
-        user_form = EditUserForm(data, files, user_instance)
+    def get_forms(self, data=None, files=None, instance=None):
+        initial = {
+            'username': instance.username,
+            'email': instance.email,
+            'bio': instance.bio,
+        }
+        user_form = EditUserForm(data=data, files=files, instance=instance, initial=initial)
 
         return user_form

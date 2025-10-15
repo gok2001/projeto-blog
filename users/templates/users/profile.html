@@ -7,12 +7,12 @@
         <p>Conta criada em: {{ user.date_joined|date:'d/m/y H:i' }}</p>
         <div class="profile-avatar">
             {% if user.profile.avatar %}
-                <img src="{{ user.profile.avatar }}" alt="Avatar de {{ user.username }}">
+                <img src="{{ user.avatar }}" alt="Avatar de {{ user.username }}">
             {% else %}
                 <div class="avatar-placeholder">Sem avatar</div>
             {% endif %}
         </div>
-        <p>Bio: {{ user.profile.bio }}</p>
+        <p>Bio: {{ user.bio }}</p>
     </div>
 
     <div class="profile-btns">
