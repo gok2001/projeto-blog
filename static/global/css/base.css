@@ -1,0 +1,142 @@
+@charset "UTF-8";
+
+/* ==========================================
+   BASE.CSS
+   Configurações globais, variáveis, reset e tipografia
+   ========================================== */
+
+/* ===============================
+   🎨 VARIÁVEIS GLOBAIS
+   =============================== */
+:root {
+    /* ---------- CORES ---------- */
+    --color-primary: #1E3A8A;
+    --color-secondary: #2563EB;
+    --color-accent: #3B82F6;
+    --color-light-bg: #F9FAFB;
+    --color-card-bg: #FFFFFF;
+    --color-border: #E5E7EB;
+    --color-text: #1F2937;
+    --color-text-light: #6B7280;
+    --color-error: #EF4444;
+    --color-error-dark: #b91c1c;
+    --color-success: #10B981;
+    --color-warning: #F59E0B;
+
+    /* ---------- TIPOGRAFIA ---------- */
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-size-xs: 0.75rem;
+    --font-size-sm: 0.875rem;
+    --font-size-md: 1rem;
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.75rem;
+    --font-size-xxxl: 2rem;
+    --font-weight-light: 300;
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    /* ---------- ESPAÇAMENTOS ---------- */
+    --spacing-xxs: 4px;
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-xxl: 48px;
+
+    /* ---------- ELEMENTOS RECORRENTES ---------- */
+    --border-radius-sm: 6px;
+    --border-radius-md: 8px;
+    --border-radius-lg: 16px;
+    --border-radius-full: 9999px;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 2px 4px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --transition-fast: 0.15s ease-in-out;
+    --transition-medium: 0.25s ease-in-out;
+    --transition-slow: 0.4s ease-in-out;
+    --avatar-size: 150px;
+
+    /* ---------- RESPONSIVIDADE ---------- */
+    --container-width-sm: 540px;
+    --container-width-md: 720px;
+    --container-width-lg: 960px;
+    --container-width-xl: 1140px;
+}
+
+/* ===============================
+   RESET E CONFIGURAÇÕES BASE
+   =============================== */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--color-light-bg);
+    color: var(--color-text);
+    font-family: var(--font-family);
+    font-size: var(--font-size-md);
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.5px;
+    margin-bottom: var(--spacing-sm);
+}
+
+a {
+    color: var(--color-secondary);
+    text-decoration: none;
+    font-weight: var(--font-weight-medium);
+    transition: color var(--transition-medium);
+}
+
+a:hover {
+    color: var(--color-accent);
+}
+
+/* ===============================
+   IMAGENS
+   =============================== */
+img {
+    max-width: 100%;
+    display: block;
+    border-radius: var(--border-radius-lg);
+    transition: transform var(--transition-medium);
+}
+
+img:hover {
+    transform: scale(1.02);
+}
+
+/* ===============================
+   MEDIA QUERIES - TIPOGRAFIA
+   =============================== */
+@media (max-width: 1024px) {
+    h1 {
+        font-size: var(--font-size-xxxl);
+    }
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: var(--font-size-xxl);
+    }
+}
