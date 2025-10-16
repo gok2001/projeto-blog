@@ -1,10 +1,29 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <form action="{% url "users:edit_profile" %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ user_form.as_p }}
-        
-        <button type="submit">Editar</button>
-    </form>
+    <div class="edit-profile-content">
+        <h1>Edite seu perfil</h1>
+
+        <form action="{% url "users:edit_profile" %}" method="POST" enctype="multipart/form-data" class="form-base edit-profile-form">
+            {% csrf_token %}
+            
+            {% for field in user_form %}
+                <div class="edit-profile-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help-text">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="error-text">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
+
+            <div class="edit-profile-btns">
+                <button type="button" class="btn-base btn-danger" onclick="window.location.href='{% url "users:profile" %}'">Cancelar</button>
+                <button type="submit" class="btn-base btn-primary">Salvar alterações</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

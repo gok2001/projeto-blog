@@ -18,8 +18,7 @@
     cursor: pointer;
     text-decoration: none;
     color: #fff;
-    transition: background-color var(--transition-medium),
-        transform var(--transition-medium);
+    transition: background-color var(--transition-medium), transform var(--transition-medium);
 }
 
 .btn-primary {
@@ -91,8 +90,7 @@
     background-color: var(--color-card-bg);
     outline: none;
     resize: none;
-    transition: border-color var(--transition-medium),
-        box-shadow var(--transition-medium);
+    transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
 }
 
 .input-base:focus {
