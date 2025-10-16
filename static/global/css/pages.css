@@ -76,6 +76,31 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-md);
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+/* Categorias e tags */
+.post-meta {
+    max-width: var(--container-width-md);
+    margin: 0 auto var(--spacing-xl);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-light);
+}
+
+.post-meta p {
+    margin: 0;
+}
+
+.post-meta .tags a {
+    margin-right: var(--spacing-xxs);
+    background-color: var(--color-card-bg);
+    padding: var(--spacing-xxs) var(--spacing-xs);
+    border-radius: var(--border-radius-md);
+    font-weight: var(--transition-medium);
 }
 
 /* Comentários e respostas */
@@ -338,9 +363,29 @@
         padding: var(--spacing-sm);
     }
 
+    /* POST INDIVIDUAL */
     .post-content {
         max-width: 400px;
         margin: var(--spacing-md) auto;
+    }
+
+    .post-content {
+        padding: var(--spacing-md);
+    }
+
+    .post-meta {
+        max-width: 400px;
+        margin: var(--spacing-md) auto;
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .post-meta p {
+        gap: var(--spacing-xxs);
+    }
+
+    .post-meta .tags a {
+        margin-bottom: var(--spacing-xxs);
     }
 
     /* LOGIN */
