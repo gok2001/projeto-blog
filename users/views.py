@@ -7,7 +7,7 @@ from django.urls import reverse_lazy
 from django.views import View
 from django.views.generic import TemplateView
 
-from .forms import EditUserForm, RegisterUserForm
+from .forms import EditUserForm, RegisterUserForm, LoginForm
 
 
 class RegisterView(View):
@@ -55,6 +55,7 @@ class RegisterView(View):
 class Login(LoginView):
     template_name = 'users/login.html'
     redirect_authenticated_user = True
+    authentication_form = LoginForm
 
     def form_valid(self, form):
         messages.success(self.request, f'Bem-vindo, {form.get_user()}!')

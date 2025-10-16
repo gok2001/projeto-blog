@@ -1,11 +1,30 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <div class="login-content">
+    <div class="user-form-content">
         <h1>Login</h1>
-        <form action="{% url "users:login" %}" method="POST" class="form-base login-form">
+
+        <form action="{% url "users:login" %}" method="POST" class="form-base user-form">
             {% csrf_token %}
-            {{ form.as_p }}
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <p class="error-text">{{ error }}</p>
+                {% endfor %}
+            {% endif %}
+            
+            {% for field in form %}
+                <div class="user-form-group">
+                    <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
+                    {{ field }}
+                    {% if field.help_text %}
+                        <p class="help-text">{{ field.help_text }}</p>
+                    {% endif %}
+                    {% for error in field.errors %}
+                        <p class="error-text">{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
             <button type="submit" class="btn-base btn-primary">Login</button>
         </form>

@@ -1,5 +1,6 @@
 from django import forms
-from django.contrib.auth import get_user_model, password_validation
+from django.contrib.auth import authenticate, get_user_model, password_validation
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class RegisterUserForm(forms.ModelForm):
@@ -262,3 +263,35 @@ class EditUserForm(forms.ModelForm):
             user.save()
 
         return user
+
+
+class LoginForm(AuthenticationForm):
+    username = forms.CharField(
+        required=True,
+        help_text='Digite seu nome de usuário.',
+        strip=True,
+        widget=forms.TextInput(attrs={'class': 'input-base'}),
+    )
+
+    password = forms.CharField(
+        label='Senha',
+        widget=forms.PasswordInput(attrs={'class': 'input-base'}),
+        required=True,
+        help_text='Digite sua senha.',
+        strip=False,
+    )
+
+    error_messages = {
+        'invalid_login': 'Usuário ou senha incorretos.'
+    }
+
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     username = cleaned_data.get('username')
+    #     password = cleaned_data.get('password')
+
+    #     if username and password:
+    #         user = authenticate(username=username, password=password)
+    #         if user is None:
+    #             raise forms.ValidationError("Usuário ou senha inválidos.")
+    #     return cleaned_data
