@@ -1,14 +1,14 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <div class="edit-profile-content">
+    <div class="user-form-content">
         <h1>Edite seu perfil</h1>
 
-        <form action="{% url "users:edit_profile" %}" method="POST" enctype="multipart/form-data" class="form-base edit-profile-form">
+        <form action="{% url "users:edit_profile" %}" method="POST" enctype="multipart/form-data" class="form-base user-form">
             {% csrf_token %}
             
             {% for field in user_form %}
-                <div class="edit-profile-group">
+                <div class="user-form-group">
                     <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                     {{ field }}
                     {% if field.help_text %}
@@ -20,7 +20,7 @@
                 </div>
             {% endfor %}
 
-            <div class="edit-profile-btns">
+            <div class="user-form-btns">
                 <button type="button" class="btn-base btn-danger" onclick="window.location.href='{% url "users:profile" %}'">Cancelar</button>
                 <button type="submit" class="btn-base btn-primary">Salvar alterações</button>
             </div>

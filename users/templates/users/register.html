@@ -1,14 +1,14 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <div class="register-content">
+    <div class="user-form-content">
         <h1>Crie sua conta</h1>
 
-        <form action="{% url "users:register" %}" method="POST" enctype="multipart/form-data" class="form-base register-form">
+        <form action="{% url "users:register" %}" method="POST" enctype="multipart/form-data" class="form-base user-form">
             {% csrf_token %}
 
             {% for field in user_form %}
-                <div class="register-group">
+                <div class="user-form-group">
                     <label for="{{ field.id_for_label }}">{{ field.label }}:</label>
                     {{ field }}
                     {% if field.help_text %}

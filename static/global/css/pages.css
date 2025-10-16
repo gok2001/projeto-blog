@@ -250,9 +250,9 @@
 }
 
 /* ===============================
-   REGISTRO
+   REGISTRO / PERFIL (EDIÇÃO)
    =============================== */
-.register-content {
+.user-form-content {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -261,14 +261,14 @@
     padding: 0 var(--spacing-md);
 }
 
-.register-content h1 {
+.user-form-content h1 {
     color: var(--color-primary);
     font-size: var(--font-size-xxxl);
     margin-bottom: var(--spacing-lg);
     text-align: center;
 }
 
-.register-group {
+.user-form-group {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-xxs);
@@ -276,16 +276,11 @@
     max-width: 350px;
 }
 
-.register-form {
+.user-form {
     max-width: 500px;
 }
 
-.register-form label {
-    font-weight: var(--font-weight-medium);
-    margin-bottom: var(--spacing-xxs);
-}
-
-.register-form .btn-primary {
+.user-form .btn-primary {
     width: 100%;
     max-width: 220px;
     padding: var(--spacing-xs);
@@ -293,74 +288,29 @@
     font-size: var(--font-size-md);
 }
 
-.register-form .help-text {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-light);
-    line-height: 1.4;
-    white-space: pre-wrap;
-}
-
-.register-form .error-text {
-    font-size: var(--font-size-xs);
-    color: var(--color-error);
-    line-height: 1.4;
-    margin-top: var(--spacing-xxs);
-}
-
-/* ===============================
-   PERFIL (EDIÇÃO)
-   =============================== */
-.edit-profile-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: var(--container-width-md);
-    margin: var(--spacing-xl) auto;
-    padding: 0 var(--spacing-md);
-}
-
-.edit-profile-content h1 {
-    color: var(--color-primary);
-    font-size: var(--font-size-xxxl);
-    margin-bottom: var(--spacing-lg);
-    text-align: center;
-}
-
-.edit-profile-group {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-xxs);
-    width: 100%;
-    max-width: 350px;
-}
-
-.edit-profile-form {
-    max-width: 500px;
-}
-
-.edit-profile-btns {
+.user-form-btns {
     display: flex;
     justify-content: center;
     gap: var(--spacing-md);
     margin-top: var(--spacing-lg);
 }
 
-.edit-profile-form .edit-profile-btns .btn-primary,
-.edit-profile-form .edit-profile-btns .btn-danger {
+.user-form .user-form-btns .btn-primary,
+.user-form .user-form-btns .btn-danger {
     width: 100%;
     padding: var(--spacing-xs);
     margin-top: var(--spacing-md);
     font-size: var(--font-size-md);
 }
 
-.edit-profile-form .help-text {
+.user-form .help-text {
     font-size: var(--font-size-xs);
     color: var(--color-text-light);
     line-height: 1.4;
     white-space: pre-wrap;
 }
 
-.edit-profile-form .error-text {
+.user-form .error-text {
     font-size: var(--font-size-xs);
     color: var(--color-error);
     line-height: 1.4;
@@ -474,7 +424,7 @@
     }
 
     /* PERFIL (EDIÇÃO) */
-    .edit-profile-content h1 {
+    .user-form-content h1 {
         font-size: var(--font-size-xxl);
     }
 
