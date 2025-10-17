@@ -24,6 +24,9 @@
                     <a href="{% url "users:login" %}">Login</a>
                     <a href="{% url "users:register" %}">Registrar</a>
                 {% endif %}
+                {% if user.is_authenticated and user.is_superuser %}
+                    <a href="{% url "posts:create" %}">Criar post</a>
+                {% endif %}
             </div>
         </nav>
 
