@@ -12,7 +12,11 @@
         <div class="posts-container">
             {% for post in posts %}
                 <article class="post-card">
-                    <img src="#" alt="Imagem do post">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" alt="{{ post.title }}">
+                    {% else %}
+                        <img src="#" alt="Imagem padrão">
+                    {% endif %}
                     <h2>{{ post.title }}</h2>
                     <p>{{ post.summary }}</p>
                     <a href="{% url "posts:detail" post.pk %}" class="btn-base btn-primary">Leia mais</a>
