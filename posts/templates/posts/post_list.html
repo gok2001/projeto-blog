@@ -1,4 +1,5 @@
 {% extends "global/base.html" %}
+{% load static %}
 
 {% block content %}
     <div class="home-content">
@@ -15,7 +16,7 @@
                     {% if post.image %}
                         <img src="{{ post.image.url }}" alt="{{ post.title }}">
                     {% else %}
-                        <img src="#" alt="Imagem padrão">
+                        <img src="{% static "global/images/placeholder.jpg" %}" alt="Imagem padrão">
                     {% endif %}
                     <h2>{{ post.title }}</h2>
                     <p>{{ post.summary }}</p>

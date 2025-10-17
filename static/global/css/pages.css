@@ -45,6 +45,11 @@
     box-shadow: var(--shadow-lg);
 }
 
+.post-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
 .post-card h2 {
     margin: var(--spacing-sm) 0;
     font-size: var(--font-size-lg);
