@@ -21,8 +21,7 @@ class CommentForm(forms.ModelForm):
                 'maxlength': 500,
                 'rows': 5,
                 'placeholder': 'Escreva seu comentário aqui...',
-                'class': 'input-base'
-                
+                'class': 'input-base',
             }),
         }
 
@@ -33,7 +32,7 @@ class CommentForm(forms.ModelForm):
         if len(text) < 3:
             raise ValidationError(
                 'Escreva uma mensagem um pouco mais longa.',
-                code='min_length'
+                code='min_length',
             )
 
         return text
