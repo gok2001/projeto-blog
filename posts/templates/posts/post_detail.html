@@ -3,7 +3,7 @@
 {% block content %}
     <main class="post-content">
         <h1>{{ post.title }}</h1>
-        <p>{{ post.content }}</p>
+        {{ post.content|safe }}
         <small>{{ post.author }} | {{ post.created_at }}</small>
     </main>
 

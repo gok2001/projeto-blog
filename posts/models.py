@@ -1,3 +1,5 @@
+from ckeditor_uploader.fields import RichTextUploadingField
+
 from django.core.exceptions import ValidationError
 from django.db import models
 from django.utils.text import slugify
@@ -49,7 +51,7 @@ class Post(models.Model):
         on_delete=models.CASCADE,
         related_name='posts'
     )
-    content = models.TextField()
+    content = RichTextUploadingField()
     summary = models.CharField(max_length=300, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     category = models.ForeignKey(
