@@ -1,4 +1,4 @@
-# Blog Pessoal em Django
+# Blog Pessoal em Django - Sistema de Posts, Comentários e Administração
 
 Blog pessoal desenvolvido em Django como projeto de aprendizado, focado em boas práticas de desenvolvimento web.
 Permite que o administrador crie posts enquanto usuários autenticados podem comentar e responder comentários.
@@ -12,6 +12,7 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 * Django 5.2
 * SQLite (por enquanto, banco padrão)
 * HTML/CSS para templates
+* CKEditor para edição de posts (WYSIWWYG)
 
 ---
 
@@ -25,6 +26,10 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 * Respostas a comentários (replies)
 * Edição e deleção de comentários e respostas inline (apenas pelo autor)
 * Validação de comentários (mínimo e máximo de caracteres)
+* Criação e edição de posts com CKEditor
+* Upload de imagens em posts
+* Tags e categorias para posts
+* Interface responsiva e estilizada
 
 ---
 
@@ -32,9 +37,10 @@ O foco é aprender boas práticas de Django, gerenciamento de usuários, relacio
 
 ### Em desenvolvimento
 
+* Integração visual completa do CKEditor
 * Feedback visual usando Django messages
 * Ordenação e filtragem de comentários
-* Interface mais elaborada e responsiva
+* Estilização completa da página de criação de posts
 
 ### Planejado
 
@@ -72,11 +78,13 @@ O projeto estará disponível em ```http://127.0.0.1:8000```
 
 ## Estrutura do projeto
 
-* ```posts/``` - App principal com models, views, templates e forms
-* ```users``` - App com models, views, templates e forms de usuário
-* ```templates/``` - Templates HTML globais
-* ```static/``` - CSS e arquivos estáticos
-* ```db.sqlite3``` - Banco de dados SQLite (padrão)
+* `posts/` - App principal com models, views, templates e forms
+    * `templates/posts/` – Templates específicos dos posts
+* `users` - App com models, views, templates e forms de usuário
+    * `templates/users/` – Templates de login, registro e perfil
+* `templates/global/` - Templates HTML globais
+* `static/` - CSS e arquivos estáticos
+* `db.sqlite3` - Banco de dados SQLite (padrão)
 
 ---
 
