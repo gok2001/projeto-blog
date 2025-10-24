@@ -176,6 +176,73 @@
 }
 
 /* ===============================
+   CRIAÇÃO DE POST
+   =============================== */
+.create-post-content {
+    max-width: var(--container-width-sm);
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-xl) var(--spacing-md);
+    background-color: var(--color-card-bg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-md);
+}
+
+.create-post-content h1 {
+    color: var(--color-primary);
+    font-size: var(--font-size-xxxl);
+    text-align: center;
+    margin-bottom: var(--spacing-lg);
+}
+
+.create-post-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-md);
+}
+
+.create-post-form button {
+    align-self: center;
+    margin-top: var(--spacing-md);
+}
+
+.ckeditor-content h1 {
+    font-size: var(--font-size-xxxl);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.ckeditor-content h2 {
+    font-size: var(--font-size-xxl);
+    color: var(--color-text);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-sm);
+}
+
+.ckeditor-content p {
+    font-size: var(--font-size-md);
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: var(--spacing-sm);
+}
+
+.ckeditor-content a {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+
+.ckeditor-content a:hover {
+    color: var(--color-accent);
+}
+
+
+/* ===============================
    PERFIL PESSOAL
    =============================== */
 .profile-info {
@@ -391,6 +458,15 @@
 
     .post-meta .tags a {
         margin-bottom: var(--spacing-xxs);
+    }
+
+    .create-post-content {
+        padding: var(--spacing-lg);
+        margin: var(--spacing-lg) auto;
+    }
+
+    .create-post-content h1 {
+        font-size: var(--font-size-xxl);
     }
 
     /* LOGIN */

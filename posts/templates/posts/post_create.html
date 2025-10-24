@@ -1,14 +1,16 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <form action="{% url "posts:create" %}" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
+    <div class="post-create-container">
+        <h1>Criar novo post</h1>
 
-        <h1>Criar um post</h1>
+        <form action="{% url "posts:create" %}" method="POST" enctype="multipart/form-data" class="form-base create-post-form">
+            {% csrf_token %}
+            
+            {{ form.as_p }}
 
-        {{ form.as_p }}
-
-        <button type="submit" class="btn-base btn-primary">Postar</button>
-    </form>
-    {{ form.media }}
+            <button type="submit" class="btn-base btn-primary">Postar</button>
+        </form>
+        {{ form.media }}
+    </div>
 {% endblock content %}

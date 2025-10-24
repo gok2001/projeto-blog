@@ -132,8 +132,10 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
-        'height': 300,
+        'height': 400,
         'width': '100%',
+        'contentCss': ['/static/global/css/pages.css', '/static/global/css/base.css'],
+        'bodyClass': 'ckeditor-content',
     },
 }
 

@@ -7,7 +7,7 @@
             <button 
                 type="button"
                 onclick="toggleForm('edit-form-{{ reply.id }}', 'comment-{{ reply.id }}')"
-                class="btn btn-secondary"
+                class="btn-base btn-secondary edit-btn"
             >
                 Editar
             </button>
@@ -16,7 +16,7 @@
             <form action="{% url "posts:comment_delete" reply.id %}" method="POST" style="display: inline;">
                 {% csrf_token %}
 
-                <button type="submit" class="btn-base btn-danger">Deletar</button>
+                <button type="submit" class="btn-base btn-danger delete-btn">Deletar</button>
             </form>
         {% endif %}
     </div>
@@ -28,6 +28,6 @@
 
         {{ reply_form.text }}
         <input type="hidden" name="parent_id" value="{{ comment.id }}">
-        <button type="submit" class="btn-base btn-primary">Responder</button>
+        <button type="submit" class="btn-base btn-primary reply-btn">Responder</button>
     </form>
 </div>
