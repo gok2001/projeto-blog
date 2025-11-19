@@ -1,7 +1,7 @@
 {% extends "global/base.html" %}
 
 {% block content %}
-    <div class="post-create-container">
+    <div class="create-post-container">
         <h1>Criar novo post</h1>
 
         <form action="{% url "posts:create" %}" method="POST" enctype="multipart/form-data" class="form-base create-post-form">

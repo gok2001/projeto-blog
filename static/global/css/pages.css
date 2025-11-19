@@ -178,7 +178,7 @@
 /* ===============================
    CRIAÇÃO DE POST
    =============================== */
-.create-post-content {
+.create-post-container {
     max-width: var(--container-width-sm);
     margin: var(--spacing-xl) auto;
     padding: var(--spacing-xl) var(--spacing-md);
@@ -192,7 +192,7 @@
     gap: var(--spacing-md);
 }
 
-.create-post-content h1 {
+.create-post-container h1 {
     color: var(--color-primary);
     font-size: var(--font-size-xxxl);
     text-align: center;
@@ -460,12 +460,12 @@
         margin-bottom: var(--spacing-xxs);
     }
 
-    .create-post-content {
+    .create-post-container {
         padding: var(--spacing-lg);
         margin: var(--spacing-lg) auto;
     }
 
-    .create-post-content h1 {
+    .create-post-container h1 {
         font-size: var(--font-size-xxl);
     }
 
